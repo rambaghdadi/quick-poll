@@ -8,6 +8,7 @@ import Notification from "../components/General/Notification/Notification"
 export const NewPoll: NextPage = () => {
 	const [link, setLink] = useState<null | string>(null)
 	const [error, setError] = useState<null | string>(null)
+	const [notification, setNotification] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [copiedURL, setCopiedURL] = useState(false)
 
@@ -16,7 +17,7 @@ export const NewPoll: NextPage = () => {
 		setError(null)
 		setLoading(true)
 		try {
-			const response = await fetch(`/apis/poll`, {
+			const response = await fetch(`/api/poll`, {
 				method: "POST",
 				body: JSON.stringify(formData),
 				headers: {
@@ -26,6 +27,7 @@ export const NewPoll: NextPage = () => {
 			const data = await response.json()
 			console.log(data)
 			setLink(`https://quickpolls.vercel.app/poll/${data.data.id}`)
+			setNotification(true)
 			setLoading(false)
 		} catch (error) {
 			setLoading(false)
@@ -49,6 +51,13 @@ export const NewPoll: NextPage = () => {
 
 	return (
 		<>
+			{notification && (
+				<Notification
+					success={true}
+					message={"Poll has been created!"}
+					dismiss={() => setNotification(false)}
+				/>
+			)}
 			{error && (
 				<Notification
 					success={false}

@@ -66,7 +66,7 @@ export default function Poll() {
 			rehydrateUI()
 		} catch (error) {
 			let err = error as Error
-			setError(err.toString())
+			setError(err.toString().split(":")[2].trim())
 		}
 	}
 
