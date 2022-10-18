@@ -2,6 +2,7 @@ import { NextPage } from "next"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import LoadingSpinner from "../../components/General/LoadingSpinner/LoadingSpinner"
+import Notification from "../../components/General/Notification/Notification"
 import Option from "../../components/Poll/Option/Option"
 import OptionContainer from "../../components/Poll/Option/OptionContainer"
 import { PollQuestion } from "../../utils/types"
@@ -12,6 +13,7 @@ import { PollQuestion } from "../../utils/types"
 
 export default function Poll() {
 	const [poll, setPoll] = useState<PollQuestion | null>(null)
+	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
 
@@ -23,6 +25,7 @@ export default function Poll() {
 
 	async function getPoll() {
 		try {
+			setError("")
 			setLoading(true)
 			const response = await fetch(`/api/poll/${router.query.id}`)
 			const data = await response.json()
@@ -33,7 +36,7 @@ export default function Poll() {
 		} catch (error) {
 			setLoading(false)
 
-			// setError("Server error, please try again later.")
+			setError("Server error, please try again later.")
 			console.error(error)
 		}
 	}
@@ -62,8 +65,8 @@ export default function Poll() {
 			if (!response.ok) throw new Error(data.error)
 			rehydrateUI()
 		} catch (error) {
-			// setError("Server error, please try again later.")
-			console.error(error)
+			let err = error as Error
+			setError(err.toString())
 		}
 	}
 
@@ -74,25 +77,34 @@ export default function Poll() {
 
 	if (poll)
 		return (
-			<div>
-				<h1>{poll.question}</h1>
-				<h1>Total Votes: {poll.totalVotes}</h1>
-				<OptionContainer>
-					{poll.options.map((option) => (
-						<div key={option.id} onClick={() => vote(option.id)}>
-							<Option
-								title={option.title}
-								vote={option.vote}
-								value={
-									Number.isNaN((option.vote / poll.totalVotes) * 100)
-										? 0
-										: Math.round((option.vote / poll.totalVotes) * 100)
-								}
-							/>
-						</div>
-					))}
-				</OptionContainer>
-			</div>
+			<>
+				{error && (
+					<Notification
+						success={false}
+						message={error}
+						dismiss={() => setError("")}
+					/>
+				)}
+				<div>
+					<h1>{poll.question}</h1>
+					<h1>Total Votes: {poll.totalVotes}</h1>
+					<OptionContainer>
+						{poll.options.map((option) => (
+							<div key={option.id} onClick={() => vote(option.id)}>
+								<Option
+									title={option.title}
+									vote={option.vote}
+									value={
+										Number.isNaN((option.vote / poll.totalVotes) * 100)
+											? 0
+											: Math.round((option.vote / poll.totalVotes) * 100)
+									}
+								/>
+							</div>
+						))}
+					</OptionContainer>
+				</div>
+			</>
 		)
 }
 

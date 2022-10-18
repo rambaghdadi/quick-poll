@@ -1,11 +1,14 @@
 import type { NextPage } from "next"
 import Intro from "../components/General/Intro/Intro"
+import Notification from "../components/General/Notification/Notification"
 
 const Home: NextPage = () => {
 	return (
-		<div className="homepage">
-			<Intro />
-		</div>
+		<>
+			<div className="homepage">
+				<Intro />
+			</div>
+		</>
 	)
 }
 
