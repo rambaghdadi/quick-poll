@@ -24,7 +24,7 @@ export const NewPoll: NextPage = () => {
 			})
 			const data = await response.json()
 			console.log(data)
-			setLink(`https://polling-station.vercel.app/poll/${data.data.id}`)
+			setLink(`https://quickpolls.vercel.app/poll/${data.data.id}`)
 			setLoading(false)
 		} catch (error) {
 			setLoading(false)
