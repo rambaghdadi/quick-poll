@@ -9,7 +9,6 @@ export default async function handler(
 		// Add New Vote
 		if (req.method === "POST") {
 			const ip = req.headers["x-real-ip"]?.toString()!
-			console.log(ip)
 			const numOfVotes = await prisma.pollOption.findFirst({
 				where: {
 					id: req.body.id,
@@ -28,6 +27,7 @@ export default async function handler(
 				},
 				data: {
 					vote: numOfVotes.vote + 1,
+					voters: ip,
 					question: {
 						update: {
 							voters: ip,

@@ -59,6 +59,13 @@ a {
 	translate: -50% -50%;
 }
 
+.poll-page {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+}
+
 .btn {
 	all: unset;
 	background-color: var(--accent-color);

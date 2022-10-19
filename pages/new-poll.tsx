@@ -25,7 +25,6 @@ export const NewPoll: NextPage = () => {
 				},
 			})
 			const data = await response.json()
-			console.log(data)
 			setLink(`https://quickpolls.vercel.app/poll/${data.data.id}`)
 			setNotification(true)
 			setLoading(false)

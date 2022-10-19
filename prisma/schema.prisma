@@ -26,6 +26,7 @@ model PollOption {
   id String @id @unique @default(cuid())
   title String 
   vote Int @default(0)
+  voters String[] //fix duplication
   createdAt DateTime @default(now())
   questionId String
   question PollQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)

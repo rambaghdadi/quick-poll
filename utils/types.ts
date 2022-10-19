@@ -6,6 +6,7 @@ export interface PollQuestion {
 	allowNewOptions: boolean
 	optionLimit: number
 	totalVotes: number
+	voters: string[]
 	options: PollOption[]
 }
 
@@ -14,6 +15,7 @@ export interface PollOption {
 	title: string
 	vote: number
 	createdAt: string
+	voters: string[]
 	questionId: string
 }
 

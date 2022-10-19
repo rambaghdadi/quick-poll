@@ -1,10 +1,10 @@
-import { NextPage } from "next"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import LoadingSpinner from "../../components/General/LoadingSpinner/LoadingSpinner"
 import Notification from "../../components/General/Notification/Notification"
 import Option from "../../components/Poll/Option/Option"
 import OptionContainer from "../../components/Poll/Option/OptionContainer"
+import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
 
 // interface PollProps {
@@ -15,6 +15,7 @@ export default function Poll() {
 	const [poll, setPoll] = useState<PollQuestion | null>(null)
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
+	const [notification, setNotification] = useState(false)
 	const router = useRouter()
 
 	useEffect(() => {
@@ -32,7 +33,6 @@ export default function Poll() {
 			if (!response.ok) throw new Error(data.error)
 			setPoll(data.data)
 			setLoading(false)
-			console.log(data)
 		} catch (error) {
 			setLoading(false)
 
@@ -52,7 +52,7 @@ export default function Poll() {
 		}
 	}
 
-	async function vote(id: string) {
+	async function vote(id: string, pollId: string) {
 		try {
 			const response = await fetch(`/api/option`, {
 				method: "POST",
@@ -63,7 +63,12 @@ export default function Poll() {
 			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
+			localStorage.setItem(pollId, id)
 			rehydrateUI()
+			setNotification(true)
+			setTimeout(() => {
+				setNotification(false)
+			}, 3000)
 		} catch (error) {
 			let err = error as Error
 			setError(err.toString().split(":")[2].trim())
@@ -78,6 +83,13 @@ export default function Poll() {
 	if (poll)
 		return (
 			<>
+				{notification && (
+					<Notification
+						success={true}
+						message={"You have successfully voted in this poll."}
+						dismiss={() => setError("")}
+					/>
+				)}
 				{error && (
 					<Notification
 						success={false}
@@ -85,55 +97,28 @@ export default function Poll() {
 						dismiss={() => setError("")}
 					/>
 				)}
-				<div>
-					<h1>{poll.question}</h1>
-					<h1>Total Votes: {poll.totalVotes}</h1>
+				<div className="poll-page">
+					<Question pollQuestion={poll.question} totalVotes={poll.totalVotes} />
 					<OptionContainer>
-						{poll.options.map((option) => (
-							<div key={option.id} onClick={() => vote(option.id)}>
-								<Option
-									title={option.title}
-									vote={option.vote}
-									value={
-										Number.isNaN((option.vote / poll.totalVotes) * 100)
-											? 0
-											: Math.round((option.vote / poll.totalVotes) * 100)
-									}
-								/>
-							</div>
-						))}
+						{poll.options
+							.sort((d, a) => ("" + a.id).localeCompare(d.id))
+							.map((option, index) => (
+								<div key={option.id} onClick={() => vote(option.id, poll.id)}>
+									<Option
+										voted={localStorage.getItem(poll.id) === option.id}
+										index={index}
+										title={option.title}
+										vote={option.vote}
+										value={
+											Number.isNaN((option.vote / poll.totalVotes) * 100)
+												? 0
+												: Math.round((option.vote / poll.totalVotes) * 100)
+										}
+									/>
+								</div>
+							))}
 					</OptionContainer>
 				</div>
 			</>
 		)
 }
-
-// export const getServerSideProps: GetServerSideProps = async (
-// 	context: GetServerSidePropsContext
-// ) => {
-// 	const ip = context.req.headers["x-real-ip"]
-
-// 	console.log(ip)
-
-// 	const poll = await prisma.pollQuestion.findFirst({
-// 		where: {
-// 			id: context.query.id?.toString(),
-// 		},
-// 		include: {
-// 			options: true,
-// 		},
-// 	})
-
-// 	if (!poll) {
-// 		return {
-// 			notFound: true,
-// 		}
-// 	}
-
-// 	return {
-// 		props: {
-// 			poll: JSON.parse(JSON.stringify(poll)),
-// 			address: ip,
-// 		},
-// 	}
-// }

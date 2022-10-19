@@ -24,7 +24,7 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 			value={numOfOptions}
 			numberOfOptions={numOfOptions}
 			addOption={() => {
-				if (numOfOptions === 8) return
+				if (numOfOptions === 6) return
 				setNumOfOptions((prev) => prev + 1)
 			}}
 			removeOption={() => {
