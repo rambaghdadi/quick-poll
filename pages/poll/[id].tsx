@@ -29,7 +29,7 @@ export default function Poll() {
 			setError("")
 			setLoading(true)
 			const response = await fetch(
-				`http://localhost:4000/api/poll/${router.query.id}`
+				`https://quickpolls-backend.onrender.com/api/poll/${router.query.id}`
 			)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
@@ -46,7 +46,7 @@ export default function Poll() {
 	async function rehydrateUI() {
 		try {
 			const response = await fetch(
-				`http://localhost:4000/api/poll/${router.query.id}`
+				`https://quickpolls-backend.onrender.com/api/poll/${router.query.id}`
 			)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
@@ -59,13 +59,16 @@ export default function Poll() {
 
 	async function vote(id: string, pollId: string) {
 		try {
-			const response = await fetch(`http://localhost:4000/api/option`, {
-				method: "POST",
-				body: JSON.stringify({ id }),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
+			const response = await fetch(
+				`https://quickpolls-backend.onrender.com/api/option`,
+				{
+					method: "POST",
+					body: JSON.stringify({ id }),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			localStorage.setItem(pollId, id)

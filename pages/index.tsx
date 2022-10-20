@@ -21,3 +21,4 @@ export default Home
 //TODO start new todo from voting page
 //TODO auto delete poll
 //TODO add poll end date on voting page
+//TODO fix github page
