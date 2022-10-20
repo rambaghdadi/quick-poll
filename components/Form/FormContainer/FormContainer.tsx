@@ -62,7 +62,7 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 	}
 
 	return (
-		<form onSubmit={onSubmit}>
+		<form className={classes.form} onSubmit={onSubmit}>
 			{formComponents.map((form, index) => {
 				if (index === formNumber) {
 					return <div key={index}>{form}</div>

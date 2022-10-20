@@ -8,13 +8,13 @@
 }
 
 html {
-	height: 100%;
 	font-size: 62.5%;
+	height: 100%;
+	overflow: scroll;
+	/* max-height: 100%; */
 }
 
 body {
-	height: 100%;
-	position: relative;
 	--main-background-color: rgb(29, 29, 32);
 	--main-input-background-color: rgb(33, 33, 33);
 	--accent-color: rgb(0, 145, 255);
@@ -22,11 +22,17 @@ body {
 	--main-font-family: "Raleway", sans-serif;
 	--border-radius: 5px;
 	--font-size-small: 1.2rem;
-	--font-size-medium: 1.6rem;
-	--font-size-large: 2rem;
+	--font-size-medium: 1.7rem;
+	--font-size-large: 3.5rem;
 }
 
 body {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+
 	background-color: var(--main-background-color);
 	color: var(--main-font-color);
 	font-family: var(--main-font-family);
@@ -45,26 +51,18 @@ a {
 	text-decoration: none;
 }
 
-.homepage {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	translate: -50% -50%;
-}
-
+.homepage,
+.poll-page,
 .new-poll-page {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	translate: -50% -50%;
-	padding: 0 2rem;
+	padding: 2rem;
 }
 
-.poll-page {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	translate: -50% -50%;
+@media (min-width: 600px) {
+	.homepage,
+	.poll-page,
+	.new-poll-page {
+		padding: 10rem 2rem;
+	}
 }
 
 .btn {

@@ -20,7 +20,7 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 	numberOfOptions,
 }) => {
 	return (
-		<>
+		<div className={classes.container}>
 			<label className={classes.textLabel}>Option {index + 1}</label>
 			<div className={classes.mainInput}>
 				<input
@@ -38,7 +38,7 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 				/>
 				{numberOfOptions === index + 1 && (
 					<div className={classes.addOrRemoveContainer}>
-						{numberOfOptions < 8 && (
+						{numberOfOptions < 6 && (
 							<CirclePlus
 								onClick={addOption}
 								size={30}
@@ -57,7 +57,7 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 					</div>
 				)}
 			</div>
-		</>
+		</div>
 	)
 }
 

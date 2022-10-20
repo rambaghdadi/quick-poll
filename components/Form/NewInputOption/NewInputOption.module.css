@@ -1,3 +1,11 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-bottom: 2rem;
+	/* height: auto; */
+}
+
 .textInput {
 	background-color: var(--main-input-background-color);
 	border-radius: var(--border-radius);
@@ -5,6 +13,7 @@
 	color: white;
 	font-size: 1.6rem;
 	padding: 1.3rem 2rem;
+	font-family: var(--main-font-family);
 }
 
 .textLabel {
@@ -17,7 +26,7 @@
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	justify-content: left;
+	/* justify-content: space-between; */
 }
 
 .addOrRemoveContainer {
@@ -26,4 +35,23 @@
 	align-items: center;
 	justify-content: center;
 	gap: 1rem;
+}
+
+@media (min-width: 700px) {
+	.container {
+		width: 40rem;
+	}
+	.textLabel {
+		font-weight: 600;
+		font-size: var(--font-size-large);
+	}
+
+	.textInput {
+		background-color: var(--main-input-background-color);
+		color: white;
+		font-size: 1.8rem;
+		padding: 2rem 2rem;
+		box-shadow: 5px 10px 10px 10px rgba(0, 0, 0, 0.1);
+		width: 30rem;
+	}
 }
