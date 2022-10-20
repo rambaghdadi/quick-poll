@@ -12,14 +12,19 @@ const Intro: FC = () => {
 			transition={{ type: "tween", delay: 0.3, duration: 0.1 }}
 			className={classes.main}
 		>
+			<h1>Create instant, online, real-time polls</h1>
 			<button
 				className="btn"
+				style={{ padding: "2.5rem", fontSize: "2rem" }}
 				onClick={() => {
 					router.push("/new-poll")
 				}}
 			>
 				Create New Poll
 			</button>
+			<p>
+				No registration required. It's 100% free and takes less than a minute.
+			</p>
 		</motion.div>
 	)
 }

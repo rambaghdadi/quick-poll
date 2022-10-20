@@ -2,6 +2,63 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	gap: 2rem;
+	/* justify-content: center; */
+	display: flex;
+
+	padding: 0 2rem;
+	width: 40rem;
+}
+
+.main h1 {
+	text-align: center;
+	font-size: 4rem;
+	margin-bottom: 6rem;
+}
+
+.main p {
+	margin-top: 3rem;
+	text-align: center;
+	font-size: 1.4rem;
+	color: rgb(196, 196, 196);
+	width: 25rem;
+}
+
+@media (min-width: 550px) {
+	.main {
+		width: 55rem;
+	}
+
+	.main h1 {
+		text-align: center;
+		font-size: 6rem;
+		margin-bottom: 6rem;
+		width: 100%;
+	}
+
+	.main p {
+		margin-top: 4rem;
+		color: rgb(196, 196, 196);
+		text-align: center;
+		width: 25rem;
+	}
+}
+
+@media (min-width: 900px) {
+	.main {
+		width: 80rem;
+	}
+
+	.main h1 {
+		text-align: center;
+		font-size: 7rem;
+		margin-bottom: 6rem;
+		width: 100%;
+	}
+
+	.main p {
+		margin-top: 4rem;
+		color: rgb(196, 196, 196);
+		text-align: center;
+		width: 25rem;
+	}
 }
