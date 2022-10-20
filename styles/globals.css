@@ -57,6 +57,7 @@ a {
 	top: 50%;
 	left: 50%;
 	translate: -50% -50%;
+	padding: 0 2rem;
 }
 
 .poll-page {
@@ -80,88 +81,6 @@ a {
 
 .btn:active {
 	translate: 0 2px;
-}
-
-.btn-copied {
-	background-color: rgb(8, 127, 91);
-}
-
-.link-container {
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	width: 35rem;
-	padding: 0 1rem;
-}
-
-.link-box {
-	height: 9rem;
-
-	background-color: var(--main-input-background-color);
-	padding: 0 1rem;
-	border-radius: var(--border-radius);
-	box-shadow: (10px 10px 10px 5px rgba(red, green, blue, 0.2));
-	cursor: pointer;
-
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	width: 100%;
-}
-
-.link {
-	max-width: 5rem;
-}
-
-.link-text {
-	font-size: 1.3rem;
-	white-space: wrap;
-}
-
-.btn-copy {
-	font-size: 1.3rem;
-	padding: 1rem;
-}
-
-@media (min-width: 680px) {
-	.link-container {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		width: 70rem;
-	}
-
-	.link-box {
-		background-color: var(--main-input-background-color);
-		padding: 2rem;
-		border-radius: var(--border-radius);
-		box-shadow: (10px 10px 10px 5px rgba(red, green, blue, 0.2));
-		cursor: pointer;
-
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 2rem;
-		width: 100%;
-	}
-
-	.link {
-		flex: 1;
-		width: 100%;
-		white-space: nowrap;
-	}
-
-	.link-text {
-		font-size: 1.5rem;
-		white-space: nowrap;
-		/* white-space: no-wrap; */
-		/* word-wrap: normal; */
-	}
-
-	.btn-copy {
-		font-size: 1.6rem;
-		padding: 1rem 2rem;
-	}
 }
 
 /* @media (prefers-color-scheme: dark) {

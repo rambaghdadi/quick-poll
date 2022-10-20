@@ -4,6 +4,7 @@ import { useState } from "react"
 import FormContainer from "../components/Form/FormContainer/FormContainer"
 import LoadingSpinner from "../components/General/LoadingSpinner/LoadingSpinner"
 import Notification from "../components/General/Notification/Notification"
+import PollUrl from "../components/PollUrl/PollUrl"
 
 export const NewPoll: NextPage = () => {
 	const [link, setLink] = useState<null | string>(null)
@@ -70,24 +71,12 @@ export const NewPoll: NextPage = () => {
 			<div className="new-poll-page">
 				{!link && <FormContainer passFormData={submitPoll} />}
 				{link && (
-					<div className="link-container">
-						<div className="link-box">
-							<Link className="link" href={link}>
-								<p className="link-text">{link}</p>
-							</Link>
-							<button
-								className={
-									copiedURL ? "btn btn-copy btn-copied" : "btn btn-copy"
-								}
-								onClick={copyLink}
-							>
-								{copiedURL ? `Copied` : `Copy url`}
-							</button>
-						</div>
-						<button onClick={() => setLink(null)} className="btn">
-							Start new poll
-						</button>
-					</div>
+					<PollUrl
+						copiedURL={copiedURL}
+						copyLink={copyLink}
+						link={link}
+						resetLink={() => setLink(null)}
+					/>
 				)}
 			</div>
 		</>
