@@ -2,17 +2,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* justify-content: center; */
-	display: flex;
-
-	padding: 0 2rem;
-	width: 40rem;
 }
 
 .main h1 {
 	text-align: center;
-	font-size: 4rem;
-	margin-bottom: 6rem;
+	font-size: 4.5rem;
+	margin-bottom: 5rem;
 }
 
 .main p {
@@ -20,7 +15,7 @@
 	text-align: center;
 	font-size: 1.4rem;
 	color: rgb(196, 196, 196);
-	width: 25rem;
+	width: 26rem;
 }
 
 @media (min-width: 550px) {
