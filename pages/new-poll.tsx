@@ -18,16 +18,13 @@ export const NewPoll: NextPage = () => {
 		setError(null)
 		setLoading(true)
 		try {
-			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/poll`,
-				{
-					method: "POST",
-					body: JSON.stringify(formData),
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
+			const response = await fetch(`http://localhost:4000/api/poll`, {
+				method: "POST",
+				body: JSON.stringify(formData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
 			const data = await response.json()
 			setLink(`https://quickpolls.vercel.app/poll/${data.data.id}`)
 			setNotification(true)

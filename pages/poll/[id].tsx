@@ -12,7 +12,7 @@ import { PollQuestion } from "../../utils/types"
 // }
 
 export default function Poll() {
-	const [poll, setPoll] = useState<PollQuestion | null>(null)
+	const [poll, setPoll] = useState<PollQuestion>()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
 	const [notification, setNotification] = useState(false)
@@ -29,45 +29,43 @@ export default function Poll() {
 			setError("")
 			setLoading(true)
 			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/poll/${router.query.id}`
+				`http://localhost:4000/api/poll/${router.query.id}`
 			)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
+			console.log(data)
 			setPoll(data.data)
 			setLoading(false)
 		} catch (error) {
+			let err = error as Error
 			setLoading(false)
-
-			setError("Server error, please try again later.")
-			console.error(error)
+			setError(err.message)
 		}
 	}
 
 	async function rehydrateUI() {
 		try {
 			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/poll/${router.query.id}`
+				`http://localhost:4000/api/poll/${router.query.id}`
 			)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			setPoll(data.data)
 		} catch (error) {
-			console.error(error)
+			let err = error as Error
+			setError(err.message)
 		}
 	}
 
 	async function vote(id: string, pollId: string) {
 		try {
-			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/option`,
-				{
-					method: "POST",
-					body: JSON.stringify({ id }),
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
+			const response = await fetch(`http://localhost:4000/api/option`, {
+				method: "POST",
+				body: JSON.stringify({ id }),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			localStorage.setItem(pollId, id)
@@ -78,7 +76,7 @@ export default function Poll() {
 			}, 3000)
 		} catch (error) {
 			let err = error as Error
-			setError(err.toString().split(":")[2].trim())
+			setError(err.message)
 		}
 	}
 
@@ -94,7 +92,7 @@ export default function Poll() {
 					<Notification
 						success={true}
 						message={"You have successfully voted in this poll."}
-						dismiss={() => setError("")}
+						dismiss={() => setNotification(false)}
 					/>
 				)}
 				{error && (
@@ -125,6 +123,22 @@ export default function Poll() {
 								</div>
 							))}
 					</OptionContainer>
+				</div>
+			</>
+		)
+
+	if (error)
+		return (
+			<>
+				<Notification
+					success={false}
+					message={error}
+					dismiss={() => setError("")}
+				/>
+				<div className="poll-page">
+					<button className="btn" onClick={() => router.push("/new-poll")}>
+						Create New Poll
+					</button>
 				</div>
 			</>
 		)
