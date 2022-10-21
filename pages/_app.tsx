@@ -1,8 +1,11 @@
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import Head from "next/head"
+import Header from "../components/General/Header/Header"
+import { useRouter } from "next/router"
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const router = useRouter()
 	return (
 		<>
 			<Head>
@@ -16,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<link rel="icon" href="/favicon.ico" />
 				<title>Quick Polls</title>
 			</Head>
+			{router.asPath !== "/" && <Header />}
 			<Component {...pageProps} />
 		</>
 	)

@@ -33,7 +33,6 @@ export default function Poll() {
 			)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
-			console.log(data)
 			setPoll(data.data)
 			setLoading(false)
 		} catch (error) {
@@ -67,6 +66,7 @@ export default function Poll() {
 					headers: {
 						"Content-Type": "application/json",
 					},
+					credentials: "include",
 				}
 			)
 			const data = await response.json()
@@ -106,7 +106,11 @@ export default function Poll() {
 					/>
 				)}
 				<div className="poll-page">
-					<Question pollQuestion={poll.question} totalVotes={poll.totalVotes} />
+					<Question
+						pollQuestion={poll.question}
+						totalVotes={poll.totalVotes}
+						endDate={poll.endsAt.split("T")[0]}
+					/>
 					<OptionContainer>
 						{poll.options
 							.sort((d, a) => ("" + a.id).localeCompare(d.id))

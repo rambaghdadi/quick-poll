@@ -2,6 +2,7 @@ import { FC, FormEvent, useState } from "react"
 import NewQuestionForm from "../NewQuestionForm/NewQuestionForm"
 import NewOptionForm from "../NewOptionForm/NewOptionForm"
 import classes from "./FormContainer.module.css"
+import EndDateForm from "../EndDateForm/EndDateForm"
 
 interface FormContainerProps {
 	passFormData: ({}) => void
@@ -9,6 +10,7 @@ interface FormContainerProps {
 
 const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 	const [question, setQuestion] = useState("")
+	const [endDate, setEndDate] = useState("")
 	const [numOfOptions, setNumOfOptions] = useState(2)
 	const [formNumber, setFormNumber] = useState(0)
 	const [options, setOptions] = useState<any>({})
@@ -17,6 +19,10 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 		<NewQuestionForm
 			value={question}
 			setValue={(e: any) => setQuestion(e.target.value)}
+		/>,
+		<EndDateForm
+			value={endDate}
+			setValue={(e) => setEndDate(e.target.value)}
 		/>,
 		<NewOptionForm
 			options={options}
@@ -31,7 +37,6 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 				if (numOfOptions === 2) return
 				setNumOfOptions((prev) => prev - 1)
 			}}
-			// setValue={(e) => setNumOfOptions(e.target.valueAsNumber)}
 		/>,
 	]
 
@@ -48,6 +53,7 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 			optionLimit: numOfOptions,
 			options: optionsArray,
 			allowNewOptions: true,
+			endsAt: new Date(endDate),
 		})
 	}
 

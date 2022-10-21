@@ -4,9 +4,10 @@ import classes from "./Question.module.css"
 interface QuestionProps {
 	pollQuestion: string
 	totalVotes: number
+	endDate: string
 }
 
-const Question: FC<QuestionProps> = ({ pollQuestion, totalVotes }) => {
+const Question: FC<QuestionProps> = ({ pollQuestion, totalVotes, endDate }) => {
 	return (
 		<div className={classes.container}>
 			<p className={classes.question}>
@@ -14,6 +15,7 @@ const Question: FC<QuestionProps> = ({ pollQuestion, totalVotes }) => {
 				{pollQuestion}
 			</p>
 			<p className={classes.votes}>Total Votes: {totalVotes}</p>
+			<p className={classes.endDate}>End Date: {endDate}</p>
 		</div>
 	)
 }

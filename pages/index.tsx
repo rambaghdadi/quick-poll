@@ -14,11 +14,20 @@ const Home: NextPage = () => {
 export default Home
 
 //TODO socketIO
-//TODO fix option text wrap
-//TODO fix option ui
+//TODO fix option ui remove colors
+//TODO hide results before voting
+//TODO check date on different time zones
+
+//TODO change vote
+//TODO add time
+//TODO add option to poll creator name
+
 //TODO backend validation for inputs
+//TODO frontend validation for inputs
+
 //TODO animations
-//TODO start new todo from voting page
-//TODO auto delete poll
-//TODO add poll end date on voting page
-//TODO fix github page
+//TODO add sharing links to social media
+//TODO add GAnalytics
+//TODO add to portfolio
+
+//TODO CLSX

@@ -12,30 +12,40 @@ interface OptionProps {
 const Option: FC<OptionProps> = ({ title, value, vote, index, voted }) => {
 	const colors = [
 		"rgb(0, 145, 255)",
-		"#c92a2a",
-		"rgb(8, 127, 91)",
-		"#9c36b5",
-		"#d9480f",
-		"#087f5b",
-		"#a61e4d",
-		"#5f3dc4",
+		// "#d9480f",
+		// "rgb(8, 127, 91)",
+		// "#9c36b5",
+		// "#ffe600",
+		// "#a61e4d",
+		// "#5f3dc4",
+		// "#c92a2a",
+	]
+	const borderColors = [
+		"rgba(0, 145, 255, 0.7)",
+		// "rgba(217, 72, 15,0.7)",
+		// "rgba(8, 127, 91,0.7)",
+		// "rgba(156, 54, 181,0.7)",
+		// "rgba(8, 127, 91,0.7)",
+		// "rgba(166, 30, 77,0.7)",
+		// "rgba(95, 61, 196,0.7)",
+		// "rgba(201, 42, 42,0.7)",
 	]
 	const backgroundColors = [
 		"rgba(0, 145, 255, 0.3)",
-		"rgb(201, 42, 42,0.3)",
-		"rgb(8, 127, 91,0.3)",
-		"rgb(156, 54, 181,0.3)",
-		"rgb(217, 72, 15,0.3)",
-		"rgb(8, 127, 91,0.3)",
-		"rgb(166, 30, 77,0.3)",
-		"rgb(95, 61, 196,0.3)",
+		// "rgba(217, 72, 15,0.3)",
+		// "rgba(8, 127, 91,0.3)",
+		// "rgba(156, 54, 181,0.3)",
+		// "rgba(8, 127, 91,0.3)",
+		// "rgba(166, 30, 77,0.3)",
+		// "rgba(95, 61, 196,0.3)",
+		// "rgba(201, 42, 42,0.3)",
 	]
 
 	return (
 		<div
 			style={{
-				borderColor: colors[index],
-				backgroundColor: voted ? backgroundColors[index] : "",
+				borderColor: borderColors[0],
+				backgroundColor: voted ? backgroundColors[0] : "",
 			}}
 			className={classes.main}
 		>
@@ -47,7 +57,7 @@ const Option: FC<OptionProps> = ({ title, value, vote, index, voted }) => {
 				<div className={classes.progressBarContainer}>
 					<div
 						className={classes.progressBar}
-						style={{ backgroundColor: colors[index], width: `${value}%` }}
+						style={{ backgroundColor: colors[0], width: `${value}%` }}
 					></div>
 				</div>
 				<p className={classes.vote}>
