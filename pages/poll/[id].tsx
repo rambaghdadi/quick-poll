@@ -6,10 +6,14 @@ import Option from "../../components/Poll/Option/Option"
 import OptionContainer from "../../components/Poll/Option/OptionContainer"
 import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
+import openSocket from "socket.io-client"
 
 // interface PollProps {
 // 	poll: PollQuestion
 // }
+
+// const socket = openSocket("http://localhost:4000")
+const socket = openSocket("https://quickpolls-backend.onrender.com")
 
 export default function Poll() {
 	const [poll, setPoll] = useState<PollQuestion>()
@@ -24,10 +28,19 @@ export default function Poll() {
 		}
 	}, [router.isReady])
 
+	useEffect(() => {
+		socket.on("poll", (data) => {
+			setPoll(data.updatedPost)
+		})
+	}, [])
+
 	async function getPoll() {
 		try {
 			setError("")
 			setLoading(true)
+			// const response = await fetch(
+			// 	`http://localhost:4000/api/poll/${router.query.id}`
+			// )
 			const response = await fetch(
 				`https://quickpolls-backend.onrender.com/api/poll/${router.query.id}`
 			)
@@ -42,22 +55,30 @@ export default function Poll() {
 		}
 	}
 
-	async function rehydrateUI() {
-		try {
-			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/poll/${router.query.id}`
-			)
-			const data = await response.json()
-			if (!response.ok) throw new Error(data.error)
-			setPoll(data.data)
-		} catch (error) {
-			let err = error as Error
-			setError(err.message)
-		}
-	}
+	// async function rehydrateUI() {
+	// 	try {
+	// 		const response = await fetch(
+	// 			`http://localhost:4000/api/poll/${router.query.id}`
+	// 		)
+	// 		const data = await response.json()
+	// 		if (!response.ok) throw new Error(data.error)
+	// 		setPoll(data.data)
+	// 	} catch (error) {
+	// 		let err = error as Error
+	// 		setError(err.message)
+	// 	}
+	// }
 
 	async function vote(id: string, pollId: string) {
 		try {
+			// const response = await fetch(`http://localhost:4000/api/option`, {
+			// 	method: "POST",
+			// 	body: JSON.stringify({ id }),
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// 	credentials: "include",
+			// })
 			const response = await fetch(
 				`https://quickpolls-backend.onrender.com/api/option`,
 				{
@@ -72,7 +93,7 @@ export default function Poll() {
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			localStorage.setItem(pollId, id)
-			rehydrateUI()
+			// rehydrateUI()
 			setNotification(true)
 			setTimeout(() => {
 				setNotification(false)

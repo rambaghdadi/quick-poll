@@ -17,6 +17,8 @@ export default Home
 //TODO fix option ui remove colors
 //TODO hide results before voting
 //TODO check date on different time zones
+//TODO check date API on different browsers
+//TODO fixer header on mob
 
 //TODO change vote
 //TODO add time
