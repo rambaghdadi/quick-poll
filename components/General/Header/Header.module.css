@@ -4,7 +4,7 @@
 	left: 0px;
 	width: 100%;
 	padding: 2rem 2rem;
-	background-color: var(--main-background-color);
+	background-color: var(--main-light-background-color);
 	z-index: 1;
 }
 
@@ -24,4 +24,10 @@
 .header p {
 	font-weight: 600;
 	font-size: 2.6rem;
+}
+
+@media (prefers-color-scheme: dark) {
+	.header {
+		background-color: var(--main-background-color);
+	}
 }

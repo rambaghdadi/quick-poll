@@ -15,6 +15,7 @@ export default Home
 
 //TODO check date on different time zones
 //TODO check date API on different browsers
+//TODO light mode
 
 //TODO add time
 //TODO add option to poll creator name

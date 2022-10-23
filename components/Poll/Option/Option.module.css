@@ -1,10 +1,10 @@
 .main {
-	border: 1px solid rgba(0, 29, 52, 0.1);
+	border: var(--main-light-border);
 	border-radius: var(--border-radius);
-	background-color: var(--main-input-background-color);
+	background-color: var(--main-light-input-background-color);
+	box-shadow: var(--main-light-box-shadow);
 	cursor: pointer;
 
-	box-shadow: 5px 10px 10px 10px rgba(0, 0, 0, 0.1);
 	padding: 1rem 2rem;
 	display: flex;
 	flex-direction: column;
@@ -13,8 +13,9 @@
 }
 
 @media (hover: hover) {
-	.main:hover {
-		background-color: rgba(0, 145, 255, 0.3);
+	.main:not(.mainVoted):hover {
+		background-color: var(--accent-color);
+		color: white;
 	}
 }
 
@@ -44,7 +45,7 @@
 
 .vote {
 	font-size: 1.3rem;
-	color: rgb(197, 197, 197);
+	color: rgb(74, 74, 74);
 }
 
 .progressBarContainer {
@@ -62,5 +63,28 @@
 @media (min-width: 700px) {
 	.main {
 		padding: 2rem;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.main {
+		border-radius: var(--border-radius);
+		background-color: var(--main-input-background-color);
+		box-shadow: var(--main-box-shadow);
+	}
+
+	.mainVoted {
+		border: 1px solid rgba(0, 0, 0, 0.208);
+	}
+
+	.vote {
+		color: rgb(197, 197, 197);
+	}
+
+	@media (hover: hover) {
+		.main:not(.mainVoted):hover {
+			background-color: var(--accent-color);
+			color: white;
+		}
 	}
 }

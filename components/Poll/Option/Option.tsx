@@ -41,10 +41,7 @@ const Option: FC<OptionProps> = ({
 
 	if (!votedInPoll) {
 		return (
-			<div
-				style={{ padding: "2rem", borderColor: "white" }}
-				className={classes.main}
-			>
+			<div style={{ padding: "2rem" }} className={`${classes.main}`}>
 				<div className={classes.primarySection}>
 					<p className={classes.title}>{title}</p>
 				</div>
@@ -57,7 +54,7 @@ const Option: FC<OptionProps> = ({
 			style={{
 				backgroundColor: voted ? backgroundColors[0] : "",
 			}}
-			className={classes.main}
+			className={`${classes.main} ${classes.mainVoted}`}
 		>
 			<div className={classes.primarySection}>
 				<p className={classes.title}>{title}</p>

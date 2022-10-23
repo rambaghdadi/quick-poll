@@ -5,25 +5,38 @@
 	margin-bottom: 2rem;
 }
 
+.textLabel {
+	color: var(--main-light-font-color);
+	font-weight: 600;
+	font-size: var(--font-size-large);
+}
+
 .dateInput {
-	background-color: var(--main-input-background-color);
-	box-shadow: 5px 10px 10px 10px rgba(0, 0, 0, 0.1);
+	background-color: var(--main-light-input-background-color);
+	box-shadow: var(--main-light-box-shadow);
 	border-radius: var(--border-radius);
-	border: 1px solid rgb(90, 90, 90);
-	color: white;
+	border: var(--main-light-border);
+	color: var(--main-light-font-color);
 	font-size: 1.8rem;
 	padding: 2rem;
 	font-family: var(--main-font-family);
 }
 
-.textLabel {
-	color: var(--main-font-color);
-	font-weight: 600;
-	font-size: var(--font-size-large);
-}
-
 @media (min-width: 600px) {
 	.container {
 		width: 40rem;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.textLabel {
+		color: var(--main-font-color);
+	}
+
+	.dateInput {
+		background-color: var(--main-input-background-color);
+		box-shadow: var(--main-box-shadow);
+		border: var(--main-border);
+		color: var(--main-font-color);
 	}
 }

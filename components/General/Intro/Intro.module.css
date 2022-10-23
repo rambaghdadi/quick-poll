@@ -14,7 +14,7 @@
 	margin-top: 3rem;
 	text-align: center;
 	font-size: 1.4rem;
-	color: rgb(196, 196, 196);
+	color: rgb(122, 122, 122);
 	width: 26rem;
 }
 
@@ -24,7 +24,6 @@
 	}
 
 	.main h1 {
-		text-align: center;
 		font-size: 6rem;
 		margin-bottom: 6rem;
 		width: 100%;
@@ -32,8 +31,6 @@
 
 	.main p {
 		margin-top: 4rem;
-		color: rgb(196, 196, 196);
-		text-align: center;
 		width: 25rem;
 	}
 }
@@ -52,8 +49,6 @@
 
 	.main p {
 		margin-top: 4rem;
-		color: rgb(196, 196, 196);
-		text-align: center;
 		width: 25rem;
 	}
 }

@@ -12,7 +12,7 @@
 	position: absolute;
 	left: 8px;
 	width: 16px;
-	background: rgb(251, 251, 251);
+	background: #333;
 	animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
@@ -36,5 +36,11 @@
 	100% {
 		top: 24px;
 		height: 32px;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.lds-facebook div {
+		background: rgb(251, 251, 251);
 	}
 }

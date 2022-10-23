@@ -23,7 +23,7 @@ const Notification: FC<NotificationProps> = ({ success, message, dismiss }) => {
 				<p className={classes.message}>{message}</p>
 			</div>
 			<div onClick={dismiss} className={classes.notificationX}>
-				<X size={20} strokeWidth={1} color={"white"} />
+				<X size={20} strokeWidth={1} />
 			</div>
 		</div>
 	)

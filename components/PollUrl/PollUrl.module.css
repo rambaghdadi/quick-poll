@@ -9,10 +9,11 @@
 .linkBox {
 	height: 9rem;
 
-	background-color: var(--main-input-background-color);
+	background-color: var(--main-light-input-background-color);
 	padding: 0 2rem;
 	border-radius: var(--border-radius);
-	box-shadow: (10px 10px 10px 5px rgba(red, green, blue, 0.2));
+	box-shadow: var(--main-light-box-shadow);
+
 	cursor: pointer;
 
 	display: flex;
@@ -72,5 +73,13 @@
 		padding: 1rem;
 		width: 10rem;
 		height: 3rem;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.linkBox {
+		background-color: var(--main-input-background-color);
+		border-radius: var(--border-radius);
+		box-shadow: var(--main-box-shadow);
 	}
 }

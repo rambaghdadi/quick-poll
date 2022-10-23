@@ -14,11 +14,11 @@
 
 .votes {
 	font-size: 1.4rem;
-	color: rgb(224, 224, 224);
+	color: rgb(139, 139, 139);
 }
 .endDate {
 	font-size: 1.4rem;
-	color: rgb(224, 224, 224);
+	color: rgb(139, 139, 139);
 	margin-bottom: 1.5rem;
 }
 
@@ -29,5 +29,14 @@
 
 	.question {
 		font-size: 3.5rem;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.votes {
+		color: rgb(224, 224, 224);
+	}
+	.endDate {
+		color: rgb(224, 224, 224);
 	}
 }
