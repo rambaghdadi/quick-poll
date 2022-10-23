@@ -1,4 +1,5 @@
 import { NextPage } from "next"
+import { useEffect } from "react"
 import { useState } from "react"
 import FormContainer from "../components/Form/FormContainer/FormContainer"
 import LoadingSpinner from "../components/General/LoadingSpinner/LoadingSpinner"
@@ -12,23 +13,28 @@ export const NewPoll: NextPage = () => {
 	const [loading, setLoading] = useState(false)
 	const [copiedURL, setCopiedURL] = useState(false)
 
+	useEffect(() => {
+		console.log(process.env.NODE_ENV)
+	}, [])
+
 	async function submitPoll(formData: any) {
 		setCopiedURL(false)
 		setError(null)
 		setLoading(true)
 		try {
-			// const response = await fetch(
-			// 	`http://localhost:4000/api/poll`,
-			// 	{
-			// 		method: "POST",
-			// 		body: JSON.stringify(formData),
-			// 		headers: {
-			// 			"Content-Type": "application/json",
-			// 		},
-			// 	}
-			// )
+			// const response = await fetch(`http://localhost:4000/api/poll`, {
+			// 	method: "POST",
+			// 	body: JSON.stringify(formData),
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// })
 			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/poll`,
+				`${
+					process.env.NODE_ENV
+						? "http://localhost:4000"
+						: "https://quickpolls-backend.onrender.com"
+				}/api/poll`,
 				{
 					method: "POST",
 					body: JSON.stringify(formData),
@@ -38,8 +44,14 @@ export const NewPoll: NextPage = () => {
 				}
 			)
 			const data = await response.json()
-			// setLink(`http://localhost:4000/poll/${data.data.id}`)
-			setLink(`https://quickpolls.vercel.app/poll/${data.data.id}`)
+			// setLink(`http://localhost:3000/poll/${data.data.id}`)
+			setLink(
+				`${
+					process.env.NODE_ENV
+						? "http://localhost:4000"
+						: "https://quickpolls-backend.onrender.com"
+				}/poll/${data.data.id}`
+			)
 			setNotification(true)
 			setLoading(false)
 		} catch (error) {
@@ -67,7 +79,7 @@ export const NewPoll: NextPage = () => {
 			{notification && (
 				<Notification
 					success={true}
-					message={"Poll has been created!"}
+					message={"Your poll has been created!"}
 					dismiss={() => setNotification(false)}
 				/>
 			)}

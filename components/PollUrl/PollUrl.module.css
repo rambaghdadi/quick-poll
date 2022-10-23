@@ -3,8 +3,7 @@
 	flex-direction: column;
 	gap: 2rem;
 	height: 100%;
-	max-width: 35rem;
-	padding: 0 2rem;
+	width: 100%;
 }
 
 .linkBox {
@@ -24,7 +23,7 @@
 }
 
 .link {
-	width: 18rem;
+	width: 22rem;
 	font-weight: 500;
 	font-size: 1.4rem;
 	line-height: 2.3rem;

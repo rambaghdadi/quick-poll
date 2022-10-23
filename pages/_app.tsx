@@ -20,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>Quick Polls</title>
 			</Head>
 			{router.asPath !== "/" && <Header />}
-			<Component {...pageProps} />
+			<div className="page-container">
+				<Component {...pageProps} />
+			</div>
 		</>
 	)
 }

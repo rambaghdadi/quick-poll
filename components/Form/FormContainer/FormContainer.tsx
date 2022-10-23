@@ -10,7 +10,7 @@ interface FormContainerProps {
 
 const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 	const [question, setQuestion] = useState("")
-	const [endDate, setEndDate] = useState("")
+	const [endDate, setEndDate] = useState(new Date().toISOString().split("T")[0])
 	const [numOfOptions, setNumOfOptions] = useState(2)
 	const [formNumber, setFormNumber] = useState(0)
 	const [options, setOptions] = useState<any>({})

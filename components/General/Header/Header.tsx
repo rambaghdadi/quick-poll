@@ -8,7 +8,7 @@ const Header: FC = () => {
 	return (
 		<header className={classes.header}>
 			<div className={classes.logo} onClick={() => router.push("/")}>
-				<img src="/images/poll.png" alt="logo" />
+				<img src="/images/pollingWhite.png" alt="logo" />
 				<p>Quick Polls</p>
 			</div>
 		</header>

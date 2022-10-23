@@ -7,9 +7,17 @@ interface OptionProps {
 	vote: number
 	index: number
 	voted: boolean
+	votedInPoll: boolean
 }
 
-const Option: FC<OptionProps> = ({ title, value, vote, index, voted }) => {
+const Option: FC<OptionProps> = ({
+	title,
+	value,
+	vote,
+	index,
+	voted,
+	votedInPoll,
+}) => {
 	const colors = [
 		"rgb(0, 145, 255)",
 		// "#d9480f",
@@ -19,16 +27,6 @@ const Option: FC<OptionProps> = ({ title, value, vote, index, voted }) => {
 		// "#a61e4d",
 		// "#5f3dc4",
 		// "#c92a2a",
-	]
-	const borderColors = [
-		"rgba(0, 145, 255, 0.7)",
-		// "rgba(217, 72, 15,0.7)",
-		// "rgba(8, 127, 91,0.7)",
-		// "rgba(156, 54, 181,0.7)",
-		// "rgba(8, 127, 91,0.7)",
-		// "rgba(166, 30, 77,0.7)",
-		// "rgba(95, 61, 196,0.7)",
-		// "rgba(201, 42, 42,0.7)",
 	]
 	const backgroundColors = [
 		"rgba(0, 145, 255, 0.3)",
@@ -41,10 +39,22 @@ const Option: FC<OptionProps> = ({ title, value, vote, index, voted }) => {
 		// "rgba(201, 42, 42,0.3)",
 	]
 
+	if (!votedInPoll) {
+		return (
+			<div
+				style={{ padding: "2rem", borderColor: "white" }}
+				className={classes.main}
+			>
+				<div className={classes.primarySection}>
+					<p className={classes.title}>{title}</p>
+				</div>
+			</div>
+		)
+	}
+
 	return (
 		<div
 			style={{
-				borderColor: borderColors[0],
 				backgroundColor: voted ? backgroundColors[0] : "",
 			}}
 			className={classes.main}

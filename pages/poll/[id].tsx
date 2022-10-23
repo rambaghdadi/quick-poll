@@ -8,12 +8,12 @@ import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
 
-// interface PollProps {
-// 	poll: PollQuestion
-// }
-
 // const socket = openSocket("http://localhost:4000")
-const socket = openSocket("https://quickpolls-backend.onrender.com")
+const socket = openSocket(
+	process.env.NODE_ENV
+		? "http://localhost:4000"
+		: "https://quickpolls-backend.onrender.com"
+)
 
 export default function Poll() {
 	const [poll, setPoll] = useState<PollQuestion>()
@@ -42,7 +42,11 @@ export default function Poll() {
 			// 	`http://localhost:4000/api/poll/${router.query.id}`
 			// )
 			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/poll/${router.query.id}`
+				`${
+					process.env.NODE_ENV
+						? "http://localhost:4000"
+						: "https://quickpolls-backend.onrender.com"
+				}/api/poll/${router.query.id}`
 			)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
@@ -55,22 +59,10 @@ export default function Poll() {
 		}
 	}
 
-	// async function rehydrateUI() {
-	// 	try {
-	// 		const response = await fetch(
-	// 			`http://localhost:4000/api/poll/${router.query.id}`
-	// 		)
-	// 		const data = await response.json()
-	// 		if (!response.ok) throw new Error(data.error)
-	// 		setPoll(data.data)
-	// 	} catch (error) {
-	// 		let err = error as Error
-	// 		setError(err.message)
-	// 	}
-	// }
-
 	async function vote(id: string, pollId: string) {
 		try {
+			if (localStorage.getItem(pollId))
+				throw new Error("You have already voted in this poll.")
 			// const response = await fetch(`http://localhost:4000/api/option`, {
 			// 	method: "POST",
 			// 	body: JSON.stringify({ id }),
@@ -80,7 +72,11 @@ export default function Poll() {
 			// 	credentials: "include",
 			// })
 			const response = await fetch(
-				`https://quickpolls-backend.onrender.com/api/option`,
+				`${
+					process.env.NODE_ENV
+						? "http://localhost:4000"
+						: "https://quickpolls-backend.onrender.com"
+				}/api/option`,
 				{
 					method: "POST",
 					body: JSON.stringify({ id }),
@@ -93,7 +89,6 @@ export default function Poll() {
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			localStorage.setItem(pollId, id)
-			// rehydrateUI()
 			setNotification(true)
 			setTimeout(() => {
 				setNotification(false)
@@ -139,6 +134,7 @@ export default function Poll() {
 								<div key={option.id} onClick={() => vote(option.id, poll.id)}>
 									<Option
 										voted={localStorage.getItem(poll.id) === option.id}
+										votedInPoll={!!localStorage.getItem(poll.id)}
 										index={index}
 										title={option.title}
 										vote={option.vote}

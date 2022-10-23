@@ -1,16 +1,21 @@
 .main {
-	border: 2px solid rgb(135, 135, 135);
+	border: 1px solid rgba(0, 29, 52, 0.1);
 	border-radius: var(--border-radius);
 	background-color: var(--main-input-background-color);
 	cursor: pointer;
 
-	width: 35rem;
-	box-shadow: 5px 10px 10px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 5px 10px 10px 10px rgba(0, 0, 0, 0.1);
 	padding: 1rem 2rem;
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
-	transition: all 0.3s;
+	transition: all 0.5s;
+}
+
+@media (hover: hover) {
+	.main:hover {
+		background-color: rgba(0, 145, 255, 0.3);
+	}
 }
 
 .primarySection {
@@ -18,7 +23,7 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 2rem;
-	word-break: break-all;
+	overflow-wrap: break-word;
 }
 
 .percentage {
@@ -51,5 +56,11 @@
 .progressBar {
 	height: 1rem;
 	border-radius: var(--border-radius);
-	transition: all 0.6s;
+	transition: all 0.7s;
+}
+
+@media (min-width: 700px) {
+	.main {
+		padding: 2rem;
+	}
 }

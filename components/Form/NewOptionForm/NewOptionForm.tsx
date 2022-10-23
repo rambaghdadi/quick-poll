@@ -18,7 +18,7 @@ const NewOptionForm: FC<NewOptionFormProps> = ({
 	...props
 }) => {
 	return (
-		<>
+		<div style={{ marginTop: "2rem" }}>
 			{new Array(value).fill(0).map((_, index) => {
 				return (
 					<NewInputOption
@@ -30,7 +30,7 @@ const NewOptionForm: FC<NewOptionFormProps> = ({
 					/>
 				)
 			})}
-		</>
+		</div>
 	)
 }
 
