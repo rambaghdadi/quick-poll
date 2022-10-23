@@ -10,7 +10,7 @@ import openSocket from "socket.io-client"
 
 // const socket = openSocket("http://localhost:4000")
 const socket = openSocket(
-	process.env.NODE_ENV
+	process.env.NODE_ENV === "development"
 		? "http://localhost:4000"
 		: "https://quickpolls-backend.onrender.com"
 )
@@ -43,7 +43,7 @@ export default function Poll() {
 			// )
 			const response = await fetch(
 				`${
-					process.env.NODE_ENV
+					process.env.NODE_ENV === "development"
 						? "http://localhost:4000"
 						: "https://quickpolls-backend.onrender.com"
 				}/api/poll/${router.query.id}`
@@ -73,7 +73,7 @@ export default function Poll() {
 			// })
 			const response = await fetch(
 				`${
-					process.env.NODE_ENV
+					process.env.NODE_ENV === "development"
 						? "http://localhost:4000"
 						: "https://quickpolls-backend.onrender.com"
 				}/api/option`,

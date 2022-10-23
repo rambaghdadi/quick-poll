@@ -31,7 +31,7 @@ export const NewPoll: NextPage = () => {
 			// })
 			const response = await fetch(
 				`${
-					process.env.NODE_ENV
+					process.env.NODE_ENV === "development"
 						? "http://localhost:4000"
 						: "https://quickpolls-backend.onrender.com"
 				}/api/poll`,
@@ -47,7 +47,7 @@ export const NewPoll: NextPage = () => {
 			// setLink(`http://localhost:3000/poll/${data.data.id}`)
 			setLink(
 				`${
-					process.env.NODE_ENV
+					process.env.NODE_ENV === "development"
 						? "http://localhost:4000"
 						: "https://quickpolls-backend.onrender.com"
 				}/poll/${data.data.id}`
