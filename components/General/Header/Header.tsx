@@ -19,7 +19,7 @@ const Header: FC = () => {
 		<header className={classes.header}>
 			<div className={classes.logo} onClick={() => router.push("/")}>
 				<img
-					src={`/images/${darkMode ? "pollingDark" : "pollingWhite"}.png`}
+					src={`/images/${darkMode ? "pollingWhite" : "pollingDark"}.png`}
 					alt="logo"
 				/>
 				<p>Quick Polls</p>
