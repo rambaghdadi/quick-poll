@@ -37,6 +37,10 @@
 	gap: 1rem;
 }
 
+.icon {
+	color: #333;
+}
+
 @media (min-width: 700px) {
 	.container {
 		width: 40rem;
@@ -56,5 +60,9 @@
 		box-shadow: var(--main-box-shadow);
 		border: var(--main-border);
 		color: var(--main-font-color);
+	}
+
+	.icon {
+		color: white;
 	}
 }

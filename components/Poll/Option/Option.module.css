@@ -6,17 +6,13 @@
 	cursor: pointer;
 	width: 100%;
 
-	padding: 1rem 2rem;
+	padding: 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	gap: 1.5rem;
 
 	transition: all 0.5s;
-}
-
-.mainVoted {
-	padding: 2rem;
 }
 
 @media (hover: hover) {

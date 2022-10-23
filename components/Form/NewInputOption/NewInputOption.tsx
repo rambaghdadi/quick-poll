@@ -43,15 +43,15 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 								onClick={addOption}
 								size={30}
 								strokeWidth={1}
-								color={"white"}
-							/>
-						)}
+								className={classes.icon}
+								/>
+								)}
 						{numberOfOptions > 2 && (
 							<CircleMinus
+							className={classes.icon}
 								onClick={removeOption}
 								size={30}
 								strokeWidth={1}
-								color={"white"}
 							/>
 						)}
 					</div>
