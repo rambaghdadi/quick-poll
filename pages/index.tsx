@@ -13,14 +13,9 @@ const Home: NextPage = () => {
 
 export default Home
 
-//TODO socketIO
-//TODO fix option ui remove colors
-//TODO hide results before voting
 //TODO check date on different time zones
 //TODO check date API on different browsers
-//TODO fixer header on mob
 
-//TODO change vote
 //TODO add time
 //TODO add option to poll creator name
 

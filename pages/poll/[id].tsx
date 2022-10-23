@@ -8,7 +8,6 @@ import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
 
-// const socket = openSocket("http://localhost:4000")
 const socket = openSocket(
 	process.env.NODE_ENV === "development"
 		? "http://localhost:4000"
@@ -38,9 +37,6 @@ export default function Poll() {
 		try {
 			setError("")
 			setLoading(true)
-			// const response = await fetch(
-			// 	`http://localhost:4000/api/poll/${router.query.id}`
-			// )
 			const response = await fetch(
 				`${
 					process.env.NODE_ENV === "development"
@@ -63,14 +59,6 @@ export default function Poll() {
 		try {
 			if (localStorage.getItem(pollId))
 				throw new Error("You have already voted in this poll.")
-			// const response = await fetch(`http://localhost:4000/api/option`, {
-			// 	method: "POST",
-			// 	body: JSON.stringify({ id }),
-			// 	headers: {
-			// 		"Content-Type": "application/json",
-			// 	},
-			// 	credentials: "include",
-			// })
 			const response = await fetch(
 				`${
 					process.env.NODE_ENV === "development"
@@ -98,9 +86,6 @@ export default function Poll() {
 			setError(err.message)
 		}
 	}
-
-	//TODO unselect and change answer
-	//TODO trim percentage
 
 	if (loading) return <LoadingSpinner />
 

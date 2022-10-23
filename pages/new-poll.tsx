@@ -22,13 +22,6 @@ export const NewPoll: NextPage = () => {
 		setError(null)
 		setLoading(true)
 		try {
-			// const response = await fetch(`http://localhost:4000/api/poll`, {
-			// 	method: "POST",
-			// 	body: JSON.stringify(formData),
-			// 	headers: {
-			// 		"Content-Type": "application/json",
-			// 	},
-			// })
 			const response = await fetch(
 				`${
 					process.env.NODE_ENV === "development"
@@ -44,12 +37,11 @@ export const NewPoll: NextPage = () => {
 				}
 			)
 			const data = await response.json()
-			// setLink(`http://localhost:3000/poll/${data.data.id}`)
 			setLink(
 				`${
 					process.env.NODE_ENV === "development"
-						? "http://localhost:4000"
-						: "https://quickpolls-backend.onrender.com"
+						? "http://localhost:3000"
+						: "https://quickpolls.vercel.app"
 				}/poll/${data.data.id}`
 			)
 			setNotification(true)
