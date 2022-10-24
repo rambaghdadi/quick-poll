@@ -7,7 +7,7 @@ import OptionContainer from "../../components/Poll/Option/OptionContainer"
 import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import Head from "next/head"
 
 const socket = openSocket(
@@ -31,7 +31,9 @@ export default function Poll() {
 
 	useEffect(() => {
 		socket.on("poll", (data) => {
-			setPoll(data.updatedPost)
+			if (data.updatedPost.id === router.query.id) {
+				setPoll(data.updatedPost)
+			}
 		})
 	}, [])
 

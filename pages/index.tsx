@@ -20,7 +20,7 @@ const Home: NextPage = () => {
 
 export default Home
 
-//TODO animations
+//TODO fix socket io vulnerability
 
 //TODO check date on different time zones
 //TODO check date API on different browsers
