@@ -24,7 +24,6 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 			<label className={classes.textLabel}>Option {index + 1}</label>
 			<div className={classes.mainInput}>
 				<input
-					autoFocus={index === 0 && true}
 					className={classes.textInput}
 					value={option}
 					onChange={(e) => {

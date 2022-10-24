@@ -13,7 +13,6 @@ const EndDateForm: FC<EndDateFormProps> = ({ value, setValue }) => {
 				Enter poll end date
 			</label>
 			<input
-				autoFocus
 				className={classes.dateInput}
 				required
 				value={value}
