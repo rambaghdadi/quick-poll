@@ -26,7 +26,7 @@ const Option: FC<OptionProps> = ({
 		<motion.div
 			initial={{ opacity: 0, x: "200%" }}
 			animate={{ opacity: 1, x: 0 }}
-			transition={{ delay: index * 0.1, duration: 0.2 }}
+			transition={{ delay: index * 0.1 }}
 			style={{
 				backgroundColor: voted ? backgroundColors[0] : "",
 			}}

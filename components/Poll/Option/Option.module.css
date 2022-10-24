@@ -6,13 +6,19 @@
 	cursor: pointer;
 	width: 100%;
 
-	padding: 2rem;
+	padding: 3rem 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	gap: 1.5rem;
 
-	transition: all 0.5s;
+	max-height: 0px;
+	transition: all 0.8s;
+}
+
+.mainVoted {
+	padding: 2rem;
+	max-height: 500px;
 }
 
 @media (hover: hover) {
@@ -65,6 +71,10 @@
 
 @media (min-width: 700px) {
 	.main {
+		padding: 3rem 2rem;
+	}
+
+	.mainVoted {
 		padding: 2rem;
 	}
 }
