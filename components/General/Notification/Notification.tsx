@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { FC } from "react"
 import { X } from "tabler-icons-react"
 import classes from "./Notification.module.css"
@@ -13,7 +14,13 @@ const Notification: FC<NotificationProps> = ({ success, message, dismiss }) => {
 	let headline = success ? "Success" : "Error"
 
 	return (
-		<div className={classes.container}>
+		<motion.div
+			initial={{ opacity: 0, x: "100%" }}
+			animate={{ opacity: 1, x: 0 }}
+			exit={{ opacity: 0, x: "100%" }}
+			transition={{ type: "tween", duration: 0.1 }}
+			className={classes.container}
+		>
 			<div
 				style={{ backgroundColor: color }}
 				className={classes.notificationColor}
@@ -25,7 +32,7 @@ const Notification: FC<NotificationProps> = ({ success, message, dismiss }) => {
 			<div onClick={dismiss} className={classes.notificationX}>
 				<X size={20} strokeWidth={1} />
 			</div>
-		</div>
+		</motion.div>
 	)
 }
 

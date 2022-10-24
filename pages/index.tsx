@@ -1,11 +1,18 @@
 import type { NextPage } from "next"
 import Intro from "../components/General/Intro/Intro"
+import { motion } from "framer-motion"
 
 const Home: NextPage = () => {
 	return (
 		<>
 			<div className="homepage">
-				<Intro />
+				<motion.div
+					animate={{ opacity: 1, scale: 1 }}
+					initial={{ opacity: 0, scale: 3 }}
+					transition={{ delay: 0.4, duration: 0.4 }}
+				>
+					<Intro />
+				</motion.div>
 			</div>
 		</>
 	)
@@ -13,9 +20,14 @@ const Home: NextPage = () => {
 
 export default Home
 
+//TODO animations
+
 //TODO check date on different time zones
 //TODO check date API on different browsers
-//TODO light mode
+
+//TODO multiple votes
+//TODO secure polls option / authentication
+//TODO change vote
 
 //TODO add time
 //TODO add option to poll creator name
@@ -23,9 +35,8 @@ export default Home
 //TODO backend validation for inputs
 //TODO frontend validation for inputs
 
-//TODO animations
 //TODO add sharing links to social media
 //TODO add GAnalytics
 //TODO add to portfolio
-
-//TODO CLSX
+//TODO upgrade server
+//TODO get domain name

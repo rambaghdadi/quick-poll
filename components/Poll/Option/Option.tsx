@@ -1,5 +1,6 @@
 import { FC } from "react"
 import classes from "./Option.module.css"
+import { motion } from "framer-motion"
 
 interface OptionProps {
 	title: string
@@ -21,18 +22,11 @@ const Option: FC<OptionProps> = ({
 	const colors = ["rgb(0, 145, 255)"]
 	const backgroundColors = ["rgba(0, 145, 255, 0.3)"]
 
-	// if (!votedInPoll) {
-	// 	return (
-	// 		<div style={{ padding: "2rem" }} className={`${classes.main}`}>
-	// 			<div className={classes.primarySection}>
-	// 				<p className={classes.title}>{title}</p>
-	// 			</div>
-	// 		</div>
-	// 	)
-	// }
-
 	return (
-		<div
+		<motion.div
+			initial={{ opacity: 0, x: "200%" }}
+			animate={{ opacity: 1, x: 0 }}
+			transition={{ delay: index * 0.1, duration: 0.2 }}
 			style={{
 				backgroundColor: voted ? backgroundColors[0] : "",
 			}}
@@ -58,7 +52,7 @@ const Option: FC<OptionProps> = ({
 					</p>
 				</div>
 			)}
-		</div>
+		</motion.div>
 	)
 }
 

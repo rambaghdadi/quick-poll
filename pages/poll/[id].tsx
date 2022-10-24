@@ -7,6 +7,7 @@ import OptionContainer from "../../components/Poll/Option/OptionContainer"
 import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
+import { AnimatePresence, motion } from "framer-motion"
 
 const socket = openSocket(
 	process.env.NODE_ENV === "development"
@@ -106,7 +107,12 @@ export default function Poll() {
 						dismiss={() => setError("")}
 					/>
 				)}
-				<div className="poll-page">
+				<motion.div
+					initial={{ opacity: 0, scale: 4 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.4 }}
+					className="poll-page"
+				>
 					<Question
 						pollQuestion={poll.question}
 						totalVotes={poll.totalVotes}
@@ -132,7 +138,7 @@ export default function Poll() {
 								</div>
 							))}
 					</OptionContainer>
-				</div>
+				</motion.div>
 			</>
 		)
 

@@ -24,6 +24,7 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 			<label className={classes.textLabel}>Option {index + 1}</label>
 			<div className={classes.mainInput}>
 				<input
+					autoFocus={index === 0 && true}
 					className={classes.textInput}
 					value={option}
 					onChange={(e) => {
@@ -44,11 +45,11 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 								size={30}
 								strokeWidth={1}
 								className={classes.icon}
-								/>
-								)}
+							/>
+						)}
 						{numberOfOptions > 2 && (
 							<CircleMinus
-							className={classes.icon}
+								className={classes.icon}
 								onClick={removeOption}
 								size={30}
 								strokeWidth={1}

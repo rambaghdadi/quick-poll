@@ -1,4 +1,5 @@
 import { FC, FormEvent, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import NewQuestionForm from "../NewQuestionForm/NewQuestionForm"
 import NewOptionForm from "../NewOptionForm/NewOptionForm"
 import classes from "./FormContainer.module.css"
@@ -69,11 +70,22 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 
 	return (
 		<form className={classes.form} onSubmit={onSubmit}>
-			{formComponents.map((form, index) => {
-				if (index === formNumber) {
-					return <div key={index}>{form}</div>
-				}
-			})}
+			<AnimatePresence mode={"popLayout"}>
+				{formComponents.map((form, index) => {
+					if (index === formNumber) {
+						return (
+							<motion.div
+								initial={{ opacity: 0, x: "200%" }}
+								animate={{ opacity: 1, x: 0 }}
+								exit={{ opacity: 0, x: "-400%" }}
+								key={index}
+							>
+								{form}
+							</motion.div>
+						)
+					}
+				})}
+			</AnimatePresence>
 			<div className={classes.btnGroup}>
 				{formNumber !== 0 && (
 					<button className="btn" type="button" onClick={prevComponent}>
