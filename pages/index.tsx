@@ -33,7 +33,6 @@ export default Home
 //TODO add option to poll creator name
 
 //TODO backend validation for inputs
-//TODO frontend validation for inputs
 
 //TODO add sharing links to social media
 //TODO add GAnalytics

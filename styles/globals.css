@@ -15,6 +15,7 @@ html {
 }
 
 body {
+	overflow-x: hidden;
 	/* FONT FAMILY */
 	--main-font-family: "Raleway", sans-serif;
 

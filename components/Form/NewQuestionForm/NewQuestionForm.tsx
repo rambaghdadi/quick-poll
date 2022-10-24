@@ -14,6 +14,8 @@ const NewQuestionForm: FC<NewQuestionFormProps> = ({ setValue, value }) => {
 			</label>
 			<input
 				className={classes.textInput}
+				maxLength={150}
+				minLength={2}
 				required
 				value={value}
 				onChange={setValue}

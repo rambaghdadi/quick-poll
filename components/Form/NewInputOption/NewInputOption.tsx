@@ -24,6 +24,8 @@ const NewInputOption: FC<NewInputOptionProps> = ({
 			<label className={classes.textLabel}>Option {index + 1}</label>
 			<div className={classes.mainInput}>
 				<input
+					maxLength={150}
+					minLength={2}
 					className={classes.textInput}
 					value={option}
 					onChange={(e) => {
