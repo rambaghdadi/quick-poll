@@ -8,6 +8,7 @@ import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
 import { AnimatePresence, motion } from "framer-motion"
+import Head from "next/head"
 
 const socket = openSocket(
 	process.env.NODE_ENV === "development"
@@ -93,6 +94,9 @@ export default function Poll() {
 	if (poll)
 		return (
 			<>
+				<Head>
+					<meta property="og:description" content={poll.question} />
+				</Head>
 				{notification && (
 					<Notification
 						success={true}

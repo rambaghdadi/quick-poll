@@ -15,7 +15,6 @@ html {
 }
 
 body {
-	overflow-x: hidden;
 	/* FONT FAMILY */
 	--main-font-family: "Raleway", sans-serif;
 
@@ -57,6 +56,7 @@ body {
 	min-height: 100vh;
 	background-color: var(--main-light-background-color);
 	color: var(--main-light-font-color);
+	overflow-x: hidden;
 }
 
 .page-container {
