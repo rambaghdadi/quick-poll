@@ -26,16 +26,12 @@ export default function Poll() {
 	useEffect(() => {
 		if (router.isReady) {
 			getPoll()
+
+			socket.on(router.query.id + "poll", (data) => {
+				setPoll(data.updatedPost)
+			})
 		}
 	}, [router.isReady])
-
-	useEffect(() => {
-		socket.on("poll", (data) => {
-			if (data.updatedPost.id === router.query.id) {
-				setPoll(data.updatedPost)
-			}
-		})
-	}, [])
 
 	async function getPoll() {
 		try {
@@ -68,14 +64,13 @@ export default function Poll() {
 					process.env.NODE_ENV === "development"
 						? "http://localhost:4000"
 						: "https://quickpolls-backend.onrender.com"
-				}/api/option`,
+				}/api/option/${id}`,
 				{
 					method: "POST",
-					body: JSON.stringify({ id }),
+					body: JSON.stringify({ pollId }),
 					headers: {
 						"Content-Type": "application/json",
 					},
-					credentials: "include",
 				}
 			)
 			const data = await response.json()
