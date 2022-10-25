@@ -20,21 +20,18 @@ const Home: NextPage = () => {
 
 export default Home
 
-//TODO fix socket io vulnerability
-
-//TODO check date on different time zones
-//TODO check date API on different browsers
-
 //TODO multiple votes
 //TODO secure polls option / authentication
 //TODO change vote
+
+//TODO check date on different time zones
+//TODO check date API on different browsers
 
 //TODO add time
 //TODO add option to poll creator name
 
 //TODO backend validation for inputs
 
-//TODO add sharing links to social media
 //TODO add GAnalytics
 //TODO add to portfolio
 //TODO upgrade server

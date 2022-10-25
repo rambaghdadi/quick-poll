@@ -1,0 +1,40 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 1.6rem;
+}
+
+.container p {
+	font-size: 1.8rem;
+	font-weight: 500;
+}
+
+.btnContainer {
+	display: flex;
+	gap: 0.6rem;
+}
+
+.btnSeparator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6rem;
+}
+
+.socialBtn {
+	all: unset;
+	background-color: var(--accent-color);
+	border-radius: var(--border-radius);
+	font-size: var(--font-size-small);
+	padding: 0.6rem;
+	width: 7rem;
+	font-weight: 600;
+	text-align: center;
+	text-transform: uppercase;
+	cursor: pointer;
+	color: white;
+}
+
+.socialBtn:active {
+	translate: 0 2px;
+}

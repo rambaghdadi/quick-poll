@@ -9,6 +9,7 @@ import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
 import { motion } from "framer-motion"
 import Head from "next/head"
+import SharingMenu from "../../components/Poll/SharingMenu/SharingMenu"
 
 const socket = openSocket(
 	process.env.NODE_ENV === "development"
@@ -115,10 +116,13 @@ export default function Poll() {
 					className="poll-page"
 				>
 					<Question
+						voted={!!localStorage.getItem(poll.id)}
+						link={"https://quickpolls.vercel.app" + router.asPath}
 						pollQuestion={poll.question}
 						totalVotes={poll.totalVotes}
 						endDate={poll.endsAt.split("T")[0]}
 					/>
+
 					<OptionContainer>
 						{poll.options
 							.sort((d, a) => ("" + a.id).localeCompare(d.id))
