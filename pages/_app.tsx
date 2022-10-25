@@ -27,8 +27,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 			</div>
 
 			<Script
+				id="g-analytics-script-1"
 				async
 				src="https://www.googletagmanager.com/gtag/js?id=G-13YT2LWHNY"
+				strategy="afterInteractive"
 			/>
 			<Script
 				id="g-analytics-script-2"
