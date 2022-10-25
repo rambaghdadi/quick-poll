@@ -22,7 +22,6 @@ export default Home
 
 //TODO multiple votes
 //TODO secure polls option / authentication
-//TODO change vote
 
 //TODO check date on different time zones
 //TODO check date API on different browsers
@@ -31,8 +30,10 @@ export default Home
 //TODO add option to poll creator name
 
 //TODO backend validation for inputs
+//TODO change vote
 
 //TODO add GAnalytics
 //TODO add to portfolio
+
 //TODO upgrade server
 //TODO get domain name

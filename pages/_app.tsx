@@ -3,6 +3,7 @@ import type { AppProps } from "next/app"
 import Head from "next/head"
 import Header from "../components/General/Header/Header"
 import { useRouter } from "next/router"
+import Script from "next/script"
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter()
@@ -24,6 +25,23 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<div className="page-container">
 				<Component {...pageProps} />
 			</div>
+
+			<Script
+				async
+				src="https://www.googletagmanager.com/gtag/js?id=G-13YT2LWHNY"
+			/>
+			<Script
+				id="g-analytics-script-2"
+				strategy="afterInteractive"
+				dangerouslySetInnerHTML={{
+					__html: `
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+				  
+					gtag('config', 'G-13YT2LWHNY')`,
+				}}
+			/>
 		</>
 	)
 }
