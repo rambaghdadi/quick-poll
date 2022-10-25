@@ -9,7 +9,6 @@ import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
 import { motion } from "framer-motion"
 import Head from "next/head"
-import SharingMenu from "../../components/Poll/SharingMenu/SharingMenu"
 
 const socket = openSocket(
 	process.env.NODE_ENV === "development"
@@ -93,7 +92,14 @@ export default function Poll() {
 		return (
 			<>
 				<Head>
+					<meta property="og:title" content="Every Vote Counts!" />
 					<meta property="og:description" content={poll.question} />
+					<meta property="og:type" content="website" />
+					<meta
+						property="og:url"
+						content={"https://quickpolls.vercel.app" + router.asPath}
+					/>
+					<meta property="og:image" content="/images/votematters2.jpg" />
 				</Head>
 				{notification && (
 					<Notification

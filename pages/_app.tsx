@@ -16,7 +16,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 				/>
 				<meta name="description" content="Quick Polls" />
 				<meta name="keywords" content="Quick, Fast, Poll, Voting, Choice" />
-				<meta property="og:title" content="Quick Polls" />
 				<link rel="icon" href="/favicon.ico" />
 
 				<title>Quick Polls</title>
