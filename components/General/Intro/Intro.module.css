@@ -18,6 +18,23 @@
 	width: 26rem;
 }
 
+.changingText {
+	position: relative;
+}
+
+.changingText::after {
+	position: absolute;
+	z-index: -1;
+	content: "";
+	background-color: yellow;
+	bottom: -4px;
+	left: 0;
+	width: 100%;
+	height: 0.7rem;
+	transform: rotate(178deg) skew(25deg);
+	border-radius: 20px;
+}
+
 @media (min-width: 550px) {
 	.main {
 		width: 55rem;
@@ -37,7 +54,7 @@
 
 @media (min-width: 900px) {
 	.main {
-		width: 80rem;
+		width: 100rem;
 	}
 
 	.main h1 {

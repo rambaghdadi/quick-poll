@@ -32,8 +32,5 @@ export default Home
 //TODO backend validation for inputs
 //TODO change vote
 
-//TODO add GAnalytics
-//TODO add to portfolio
-
 //TODO upgrade server
 //TODO get domain name
