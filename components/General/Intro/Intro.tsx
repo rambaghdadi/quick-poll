@@ -3,7 +3,6 @@ import { FC, useEffect, useRef, useState } from "react"
 import classes from "./Intro.module.css"
 
 const Intro: FC = () => {
-	const [darkMode, setDarkMode] = useState(false)
 	const router = useRouter()
 	const wordInHeadline = useRef<HTMLSpanElement>(null)
 
@@ -40,19 +39,15 @@ const Intro: FC = () => {
 	}
 
 	async function loopThroughWords(words: string[]) {
-		for (let i = 0; i < words.length; i++) {
+		let i = 0
+		while (true) {
+			if (i > words.length - 1) i = 0
 			await loopThroughLetters(words[i])
-			if (i === words.length - 1) i = -1
+			i++
 		}
 	}
 
 	useEffect(() => {
-		window
-			.matchMedia("(prefers-color-scheme: dark)")
-			.addEventListener("change", (event) => {
-				const newColorScheme = event.matches ? "dark" : "light"
-			})
-
 		loopThroughWords(wordsToLoop)
 	}, [])
 
