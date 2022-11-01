@@ -9,6 +9,7 @@ interface OptionProps {
 	index: number
 	voted: boolean
 	votedInPoll: boolean
+	voting: boolean
 }
 
 const Option: FC<OptionProps> = ({
@@ -18,6 +19,7 @@ const Option: FC<OptionProps> = ({
 	index,
 	voted,
 	votedInPoll,
+	voting,
 }) => {
 	const colors = ["rgb(0, 145, 255)"]
 	const backgroundColors = ["rgba(0, 145, 255, 0.3)"]
@@ -31,7 +33,11 @@ const Option: FC<OptionProps> = ({
 				backgroundColor: voted ? backgroundColors[0] : "",
 			}}
 			className={
-				votedInPoll ? `${classes.main} ${classes.mainVoted}` : classes.main
+				votedInPoll
+					? `${classes.main} ${classes.mainVoted}`
+					: voting
+					? `${classes.main} ${classes.voting}`
+					: classes.main
 			}
 		>
 			<div className={classes.primarySection}>

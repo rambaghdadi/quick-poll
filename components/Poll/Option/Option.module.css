@@ -21,6 +21,28 @@
 	max-height: 500px;
 }
 
+.voting {
+	animation-name: backgroundColorPalette;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes backgroundColorPalette {
+	0% {
+		background: white;
+	}
+
+	50% {
+		background: rgba(0, 145, 255, 0.3);
+	}
+
+	100% {
+		background: white;
+	}
+}
+
 @media (hover: hover) {
 	.main:not(.mainVoted):hover {
 		background-color: var(--accent-color);

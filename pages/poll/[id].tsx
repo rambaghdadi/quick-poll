@@ -21,6 +21,7 @@ export default function Poll() {
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
 	const [notification, setNotification] = useState(false)
+	const [voting, setVoting] = useState<null | string>(null)
 	const router = useRouter()
 
 	useEffect(() => {
@@ -59,6 +60,7 @@ export default function Poll() {
 		try {
 			if (localStorage.getItem(pollId))
 				throw new Error("You have already voted in this poll.")
+			setVoting(id)
 			const response = await fetch(
 				`${
 					process.env.NODE_ENV === "development"
@@ -76,11 +78,13 @@ export default function Poll() {
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			localStorage.setItem(pollId, id)
+			setVoting(null)
 			setNotification(true)
 			setTimeout(() => {
 				setNotification(false)
 			}, 3000)
 		} catch (error) {
+			setVoting(null)
 			let err = error as Error
 			setError(err.message)
 		}
@@ -135,6 +139,7 @@ export default function Poll() {
 							.map((option, index) => (
 								<div key={option.id} onClick={() => vote(option.id, poll.id)}>
 									<Option
+										voting={voting === option.id}
 										voted={localStorage.getItem(poll.id) === option.id}
 										votedInPoll={!!localStorage.getItem(poll.id)}
 										index={index}

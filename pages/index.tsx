@@ -30,7 +30,6 @@ export default Home
 //TODO add option to poll creator name
 
 //TODO backend validation for inputs
-//TODO change vote
 
 //TODO upgrade server
 //TODO get domain name
