@@ -122,4 +122,18 @@
 			color: white;
 		}
 	}
+
+	@keyframes backgroundColorPalette {
+		0% {
+			background: var(--main-input-background-color);
+		}
+
+		50% {
+			background: rgba(0, 145, 255, 0.3);
+		}
+
+		100% {
+			background: var(--main-input-background-color);
+		}
+	}
 }

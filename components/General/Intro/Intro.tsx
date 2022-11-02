@@ -69,7 +69,12 @@ const Intro: FC = () => {
 	}
 
 	useEffect(() => {
-		loopThroughWords(wordsToLoop)
+		async function startLoop() {
+			await sleep(1500)
+			loopThroughWords(wordsToLoop)
+		}
+
+		startLoop()
 	}, [])
 
 	return (
