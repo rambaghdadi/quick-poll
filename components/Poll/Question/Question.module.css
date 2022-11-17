@@ -12,6 +12,28 @@
 	margin-bottom: 1.5rem;
 }
 
+.secure {
+	position: relative;
+}
+
+.secure::after {
+	position: absolute;
+	content: "Secure";
+	/* width: 12px; */
+	/* height: 10px; */
+	text-align: center;
+	font-size: 1rem;
+
+	margin-left: 0.3rem;
+
+	border: 1px solid rgba(0, 0, 255, 0.135);
+	background-color: rgba(0, 123, 255, 0.1);
+	border-radius: 8px;
+	padding: 0.2rem;
+	font-weight: 600;
+	color: rgb(81, 81, 81);
+}
+
 .votes {
 	font-size: 1.4rem;
 	color: rgb(139, 139, 139);
@@ -38,5 +60,10 @@
 	}
 	.endDate {
 		color: rgb(224, 224, 224);
+	}
+	.secure::after {
+		color: rgb(197, 197, 197);
+		border: 1px solid rgba(0, 0, 255, 0.308);
+		background-color: rgba(0, 123, 255, 0.247);
 	}
 }

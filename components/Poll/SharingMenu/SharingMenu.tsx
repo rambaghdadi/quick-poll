@@ -77,8 +77,9 @@ const SharingMenu: FC<SharingMenuProps> = ({ link, voted }) => {
 						</div>
 					</button>
 
-					{socials.map((button) => (
+					{socials.map((button, i) => (
 						<a
+							key={i}
 							href={button.href}
 							target="_blank"
 							className={classes.socialBtn}

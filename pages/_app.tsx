@@ -4,9 +4,9 @@ import Head from "next/head"
 import Header from "../components/General/Header/Header"
 import { useRouter } from "next/router"
 import Script from "next/script"
+import { AuthProvider } from "../context/authContext"
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const router = useRouter()
 	return (
 		<>
 			<Head>
@@ -21,10 +21,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 				<title>Quick Polls</title>
 			</Head>
-			{router.asPath !== "/" && <Header />}
-			<div className="page-container">
-				<Component {...pageProps} />
-			</div>
+			<AuthProvider>
+				<Header />
+				<div className="page-container">
+					<Component {...pageProps} />
+				</div>
+			</AuthProvider>
 
 			<Script
 				id="g-analytics-script-1"

@@ -11,16 +11,6 @@
 	font-size: var(--font-size-large);
 }
 
-.checkboxLabel {
-	margin: 1rem 0;
-	font-size: 1.6rem;
-	font-weight: 500;
-
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-}
-
 .textInput {
 	background-color: var(--main-light-input-background-color);
 	box-shadow: var(--main-light-box-shadow);

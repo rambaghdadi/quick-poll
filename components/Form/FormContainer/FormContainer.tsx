@@ -4,13 +4,16 @@ import NewQuestionForm from "../NewQuestionForm/NewQuestionForm"
 import NewOptionForm from "../NewOptionForm/NewOptionForm"
 import classes from "./FormContainer.module.css"
 import EndDateForm from "../EndDateForm/EndDateForm"
+import { useAuth } from "../../../context/authContext"
 
 interface FormContainerProps {
 	passFormData: ({}) => void
 }
 
 const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
+	const { user } = useAuth()
 	const [question, setQuestion] = useState("")
+	const [securePoll, setSecurePoll] = useState(false)
 	const [endDate, setEndDate] = useState(new Date().toISOString().split("T")[0])
 	const [numOfOptions, setNumOfOptions] = useState(2)
 	const [formNumber, setFormNumber] = useState(0)
@@ -18,6 +21,8 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 
 	const formComponents = [
 		<NewQuestionForm
+			checked={securePoll}
+			check={() => setSecurePoll(!securePoll)}
 			value={question}
 			setValue={(e: any) => setQuestion(e.target.value)}
 		/>,
@@ -51,10 +56,12 @@ const FormContainer: FC<FormContainerProps> = ({ passFormData }) => {
 		}
 		passFormData({
 			question,
+			secure: securePoll,
 			optionLimit: numOfOptions,
 			options: optionsArray,
 			allowNewOptions: true,
 			endsAt: new Date(endDate),
+			userId: user?.id,
 		})
 	}
 

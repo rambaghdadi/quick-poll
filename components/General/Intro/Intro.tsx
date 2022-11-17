@@ -41,20 +41,24 @@ const Intro: FC = () => {
 
 	async function loopThroughLetters(word: string) {
 		await sleep(1000)
+		if (!wordInHeadline || !wordInHeadline.current) return
 		//delete letters
-		const wordLength = wordInHeadline.current!.innerHTML.length
+		const wordLength = wordInHeadline.current.innerHTML.length
 		let i = 0
 		while (i < wordLength) {
 			await sleep(100)
-			wordInHeadline.current!.innerHTML =
-				wordInHeadline.current!.innerHTML.slice(0, -1)
+			wordInHeadline.current.innerHTML = wordInHeadline.current.innerHTML.slice(
+				0,
+				-1
+			)
 			i++
 		}
 
 		// add new word
 		await sleep(1000)
+		if (!wordInHeadline || !wordInHeadline.current) return
 		for (let letter of word) {
-			wordInHeadline.current!.innerHTML += letter
+			wordInHeadline.current.innerHTML += letter
 			await sleep(200)
 		}
 	}
@@ -71,7 +75,7 @@ const Intro: FC = () => {
 	useEffect(() => {
 		async function startLoop() {
 			await sleep(1500)
-			loopThroughWords(wordsToLoop)
+			await loopThroughWords(wordsToLoop)
 		}
 
 		startLoop()

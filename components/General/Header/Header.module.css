@@ -6,6 +6,13 @@
 	padding: 2rem 2rem;
 	background-color: var(--main-light-background-color);
 	z-index: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	font-size: 1.7rem;
+	font-weight: 600;
 }
 
 .logo {

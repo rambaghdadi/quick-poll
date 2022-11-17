@@ -7,6 +7,7 @@ export interface PollQuestion {
 	optionLimit: number
 	totalVotes: number
 	options: PollOption[]
+	secure: boolean
 }
 
 export interface PollOption {
@@ -21,4 +22,17 @@ export interface QuestionFormData {
 	question: string
 	allowNewOptions: boolean
 	optionLimit: number
+}
+
+export interface User {
+	email: string | null
+	name: string | null
+	id: string | null
+}
+
+export interface AuthProviderValues {
+	user: User | null
+	signIn: (id: string, email: string, name: string) => void
+	signOut: () => void
+	signUp: () => void
 }

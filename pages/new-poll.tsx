@@ -13,10 +13,6 @@ export const NewPoll: NextPage = () => {
 	const [loading, setLoading] = useState(false)
 	const [copiedURL, setCopiedURL] = useState(false)
 
-	useEffect(() => {
-		console.log(process.env.NODE_ENV)
-	}, [])
-
 	async function submitPoll(formData: any) {
 		setCopiedURL(false)
 		setError(null)

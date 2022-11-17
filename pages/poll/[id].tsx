@@ -27,7 +27,6 @@ export default function Poll() {
 	useEffect(() => {
 		if (router.isReady) {
 			getPoll()
-
 			socket.on(router.query.id + "poll", (data) => {
 				setPoll(data.updatedPost)
 			})
@@ -69,6 +68,7 @@ export default function Poll() {
 				}/api/option/${id}`,
 				{
 					method: "POST",
+					credentials: "include",
 					body: JSON.stringify({ pollId }),
 					headers: {
 						"Content-Type": "application/json",
@@ -126,6 +126,7 @@ export default function Poll() {
 					className="poll-page"
 				>
 					<Question
+						secure={poll.secure}
 						voted={!!localStorage.getItem(poll.id)}
 						link={"https://quickpolls.vercel.app" + router.asPath}
 						pollQuestion={poll.question}
