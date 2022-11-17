@@ -76,8 +76,11 @@ export default function Dashboard() {
 						<h1>
 							Active Polls (
 							{
-								userPolls.filter((poll) => new Date(poll.endsAt) >= new Date())
-									.length
+								userPolls.filter(
+									(poll) =>
+										new Date(poll.endsAt) >=
+										new Date(new Date().toISOString().split("T")[0])
+								).length
 							}
 							)
 						</h1>
@@ -87,8 +90,11 @@ export default function Dashboard() {
 						<h1>
 							Expired Polls (
 							{
-								userPolls.filter((poll) => new Date(poll.endsAt) < new Date())
-									.length
+								userPolls.filter(
+									(poll) =>
+										new Date(poll.endsAt) <
+										new Date(new Date().toISOString().split("T")[0])
+								).length
 							}
 							){" "}
 						</h1>
