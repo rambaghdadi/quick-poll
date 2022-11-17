@@ -59,9 +59,9 @@ export default function Poll() {
 
 	async function vote(id: string, pollId: string) {
 		try {
+			setVoting(id)
 			if (localStorage.getItem(pollId))
 				throw new Error("You have already voted in this poll.")
-			setVoting(id)
 			const response = await fetch(
 				`${
 					process.env.NODE_ENV === "development"
@@ -140,7 +140,13 @@ export default function Poll() {
 						{poll.options
 							.sort((d, a) => ("" + a.id).localeCompare(d.id))
 							.map((option, index) => (
-								<div key={option.id} onClick={() => vote(option.id, poll.id)}>
+								<div
+									key={option.id}
+									onClick={() => {
+										if (voting) return
+										vote(option.id, poll.id)
+									}}
+								>
 									<Option
 										voting={voting === option.id}
 										voted={localStorage.getItem(poll.id) === option.id}
