@@ -9,6 +9,7 @@ import { PollQuestion } from "../../utils/types"
 import openSocket from "socket.io-client"
 import { motion } from "framer-motion"
 import Head from "next/head"
+import { useAuth } from "../../context/authContext"
 
 const socket = openSocket(
 	process.env.NODE_ENV === "development"
@@ -17,6 +18,7 @@ const socket = openSocket(
 )
 
 export default function Poll() {
+	const { user } = useAuth()
 	const [poll, setPoll] = useState<PollQuestion>()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
@@ -68,10 +70,10 @@ export default function Poll() {
 				}/api/option/${id}`,
 				{
 					method: "POST",
-					credentials: "include",
 					body: JSON.stringify({ pollId }),
 					headers: {
 						"Content-Type": "application/json",
+						Authorization: user ? `Bearer ${user.token}` : "",
 					},
 				}
 			)

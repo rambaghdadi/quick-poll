@@ -1,5 +1,5 @@
-import { GetServerSidePropsContext } from "next"
-import { useState } from "react"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
 import SignUpForm from "../../components/Authentication/SignUpForm"
 import Notification from "../../components/General/Notification/Notification"
 import { useAuth } from "../../context/authContext"
@@ -7,7 +7,12 @@ import { useAuth } from "../../context/authContext"
 export default function SignUp() {
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
-	const { signUp } = useAuth()
+	const { user, signUp } = useAuth()
+	const router = useRouter()
+
+	useEffect(() => {
+		if (user) router.replace("/")
+	})
 
 	async function sendDataHandler(formData: {}) {
 		try {
@@ -21,7 +26,6 @@ export default function SignUp() {
 				}/api/signup`,
 				{
 					method: "POST",
-					credentials: "include",
 					body: JSON.stringify(formData),
 					headers: {
 						"Content-Type": "application/json",
@@ -53,22 +57,4 @@ export default function SignUp() {
 			</div>
 		</>
 	)
-}
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-	const cookie = ctx.req.cookies.userToken
-
-	if (!cookie)
-		return {
-			props: {},
-		}
-
-	if (cookie) {
-		return {
-			redirect: {
-				destination: "/dashboard",
-				permanent: false,
-			},
-		}
-	}
 }

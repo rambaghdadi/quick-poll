@@ -25,12 +25,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		if (localStorage.getItem("user")) {
+		if (localStorage.getItem("user") && localStorage.getItem("token")) {
 			const [id, email, name] = localStorage.getItem("user")!.split("-!-")
+			const token = localStorage.getItem("token")
 			setUser({
 				id,
 				email,
 				name,
+				token,
 			})
 			setLoading(false)
 		} else {
@@ -39,7 +41,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		}
 	}, [router])
 
-	function signIn(id: string, email: string, name: string): void {
+	function signIn(
+		id: string,
+		email: string,
+		name: string,
+		token: string
+	): void {
+		localStorage.setItem("token", token)
 		localStorage.setItem("user", `${id}-!-${email}-!-${name}`)
 		if (router.query.from) {
 			router.push(router.query.from.toString())
@@ -54,21 +62,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	async function signOut() {
 		try {
-			const response = await fetch(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://localhost:4000"
-						: "https://quickpolls-backend.onrender.com"
-				}/api/signout`,
-				{
-					credentials: "include",
-				}
-			)
-			if (!response.ok) throw new Error(`Please try again later.`)
 			router.push("/")
-			setUser(null)
-
 			localStorage.removeItem("user")
+			localStorage.removeItem("token")
+			setUser(null)
 		} catch (error) {
 			console.log(error)
 		}

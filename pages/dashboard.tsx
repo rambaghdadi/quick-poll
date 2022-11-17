@@ -28,7 +28,9 @@ export default function Dashboard() {
 						: "https://quickpolls-backend.onrender.com"
 				}/api/user/polls`,
 				{
-					credentials: "include",
+					headers: {
+						Authorization: `Bearer ${user?.token}`,
+					},
 				}
 			)
 			const data = await response.json()
