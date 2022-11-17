@@ -56,7 +56,7 @@ export default function SignUp() {
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-	const cookie = ctx.req.cookies.token
+	const cookie = ctx.req.cookies.userToken
 
 	if (!cookie)
 		return {
