@@ -4,6 +4,7 @@ import Head from "next/head"
 import Header from "../components/General/Header/Header"
 import Script from "next/script"
 import { AuthProvider } from "../context/authContext"
+// @ts-ignore
 import { configureAbly } from "@ably-labs/react-hooks"
 
 configureAbly({

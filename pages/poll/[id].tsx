@@ -8,7 +8,7 @@ import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
 import { motion } from "framer-motion"
 import Head from "next/head"
-import { useAuth } from "../../context/authContext"
+// @ts-ignore
 import { useChannel } from "@ably-labs/react-hooks"
 
 export default function Poll() {
