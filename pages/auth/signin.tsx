@@ -19,20 +19,13 @@ export default function SignIn() {
 		try {
 			setError("")
 			setLoading(true)
-			const response = await fetch(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://localhost:4000"
-						: "https://quickpolls-backend.onrender.com"
-				}/api/signin`,
-				{
-					method: "POST",
-					body: JSON.stringify(formData),
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
+			const response = await fetch(`/api/auth/signin`, {
+				method: "POST",
+				body: JSON.stringify(formData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.message)
 			signIn(data.data.userId, data.data.email, data.data.name, data.token)

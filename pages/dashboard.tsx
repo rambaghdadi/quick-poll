@@ -1,4 +1,3 @@
-import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import MainSection from "../components/Dashboard/MainSection/MainSection"
 import Poll from "../components/Dashboard/Poll/Poll"
@@ -21,18 +20,11 @@ export default function Dashboard() {
 		try {
 			setError("")
 			setLoading(true)
-			const response = await fetch(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://localhost:4000"
-						: "https://quickpolls-backend.onrender.com"
-				}/api/user/polls`,
-				{
-					headers: {
-						Authorization: `Bearer ${user?.token}`,
-					},
-				}
-			)
+			const response = await fetch(`/api/poll/user/polls`, {
+				headers: {
+					Authorization: `Bearer ${user?.token}`,
+				},
+			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.message)
 			setUserPolls(data.data)

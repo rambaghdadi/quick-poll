@@ -18,20 +18,13 @@ export default function SignUp() {
 		try {
 			setError("")
 			setLoading(true)
-			const response = await fetch(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://localhost:4000"
-						: "https://quickpolls-backend.onrender.com"
-				}/api/signup`,
-				{
-					method: "POST",
-					body: JSON.stringify(formData),
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
+			const response = await fetch(`/api/auth/signup`, {
+				method: "POST",
+				body: JSON.stringify(formData),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.message)
 			signUp()

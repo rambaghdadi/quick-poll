@@ -11,11 +11,11 @@ import { motion } from "framer-motion"
 import Head from "next/head"
 import { useAuth } from "../../context/authContext"
 
-const socket = openSocket(
-	process.env.NODE_ENV === "development"
-		? "http://localhost:4000"
-		: "https://quickpolls-backend.onrender.com"
-)
+// const socket = openSocket(
+// 	process.env.NODE_ENV === "development"
+// 		? "http://localhost:4000"
+// 		: "https://quickpolls-backend.onrender.com"
+// )
 
 export default function Poll() {
 	const { user } = useAuth()
@@ -26,12 +26,18 @@ export default function Poll() {
 	const [voting, setVoting] = useState<null | string>(null)
 	const router = useRouter()
 
+	// useEffect(() => {
+	// 	if (router.isReady) {
+	// 		getPoll()
+	// 		socket.on(router.query.id + "poll", (data) => {
+	// 			setPoll(data.updatedPost)
+	// 		})
+	// 	}
+	// }, [router.isReady])
+
 	useEffect(() => {
 		if (router.isReady) {
 			getPoll()
-			socket.on(router.query.id + "poll", (data) => {
-				setPoll(data.updatedPost)
-			})
 		}
 	}, [router.isReady])
 
@@ -39,13 +45,7 @@ export default function Poll() {
 		try {
 			setError("")
 			setLoading(true)
-			const response = await fetch(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://localhost:4000"
-						: "https://quickpolls-backend.onrender.com"
-				}/api/poll/${router.query.id}`
-			)
+			const response = await fetch(`/api/poll/${router.query.id}`)
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			setPoll(data.data)
@@ -57,31 +57,38 @@ export default function Poll() {
 		}
 	}
 
+	async function rehydrateUI() {
+		try {
+			setError("")
+			const response = await fetch(`/api/poll/${router.query.id}`)
+			const data = await response.json()
+			if (!response.ok) throw new Error(data.error)
+			setPoll(data.data)
+		} catch (error) {
+			let err = error as Error
+			setError(err.message)
+		}
+	}
+
 	async function vote(id: string, pollId: string) {
 		try {
 			setVoting(id)
 			if (localStorage.getItem(pollId))
 				throw new Error("You have already voted in this poll.")
-			const response = await fetch(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://localhost:4000"
-						: "https://quickpolls-backend.onrender.com"
-				}/api/option/${id}`,
-				{
-					method: "POST",
-					body: JSON.stringify({ pollId }),
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: user ? `Bearer ${user.token}` : "",
-					},
-				}
-			)
+			const response = await fetch(`/api/option/${id}`, {
+				method: "POST",
+				body: JSON.stringify({ pollId }),
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: user ? `Bearer ${user.token}` : "",
+				},
+			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.error)
 			localStorage.setItem(pollId, id)
 			setVoting(null)
 			setNotification(true)
+			rehydrateUI()
 			setTimeout(() => {
 				setNotification(false)
 			}, 3000)
