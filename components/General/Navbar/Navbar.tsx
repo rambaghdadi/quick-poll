@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAuth } from "../../../context/authContext"
 import classes from "./Navbar.module.css"
 import { Menu2, X } from "tabler-icons-react"

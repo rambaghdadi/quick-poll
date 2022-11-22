@@ -11,9 +11,8 @@ export default async function handler(
 	let optionId = req.query.optionId as string
 
 	try {
-		const authHeader = req.headers.authorization
-		if (authHeader) {
-			const token = authHeader.split(" ")[1]
+		const { token } = req.cookies
+		if (token) {
 			decodedToken = jwt.verify(token, process.env.SECRET!)
 			if (decodedToken) {
 				signedInUser = decodedToken.userId

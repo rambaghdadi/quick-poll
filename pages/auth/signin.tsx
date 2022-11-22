@@ -1,19 +1,13 @@
 import { GetServerSidePropsContext } from "next"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import SignInForm from "../../components/Authentication/SignInForm"
 import Notification from "../../components/General/Notification/Notification"
 import { useAuth } from "../../context/authContext"
 
 export default function SignIn() {
-	const { user, signIn } = useAuth()
+	const { signIn } = useAuth()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
-	const router = useRouter()
-
-	useEffect(() => {
-		if (user) router.replace("/")
-	})
 
 	async function sendDataHandler(formData: {}) {
 		try {
@@ -22,13 +16,14 @@ export default function SignIn() {
 			const response = await fetch(`/api/auth/signin`, {
 				method: "POST",
 				body: JSON.stringify(formData),
+				credentials: "include",
 				headers: {
 					"Content-Type": "application/json",
 				},
 			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.message)
-			signIn(data.data.userId, data.data.email, data.data.name, data.token)
+			signIn(data.data.userId, data.data.email, data.data.name)
 			setLoading(false)
 		} catch (error) {
 			setLoading(false)
@@ -51,4 +46,21 @@ export default function SignIn() {
 			</div>
 		</>
 	)
+}
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+	const cookie = ctx.req.cookies.token
+
+	if (!cookie)
+		return {
+			props: {},
+		}
+	if (cookie) {
+		return {
+			redirect: {
+				destination: "/dashboard",
+				permanent: false,
+			},
+		}
+	}
 }

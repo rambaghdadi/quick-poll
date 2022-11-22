@@ -28,12 +28,11 @@ export interface User {
 	email: string | null
 	name: string | null
 	id: string | null
-	token: string | null
 }
 
 export interface AuthProviderValues {
 	user: User | null
-	signIn: (id: string, email: string, name: string, token: string) => void
+	signIn: (id: string, email: string, name: string) => void
 	signOut: () => void
 	signUp: () => void
 }

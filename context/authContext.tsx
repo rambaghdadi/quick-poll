@@ -25,14 +25,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		if (localStorage.getItem("user") && localStorage.getItem("token")) {
+		if (localStorage.getItem("user")) {
 			const [id, email, name] = localStorage.getItem("user")!.split("-!-")
-			const token = localStorage.getItem("token")
 			setUser({
 				id,
 				email,
 				name,
-				token,
 			})
 			setLoading(false)
 		} else {
@@ -41,13 +39,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		}
 	}, [router])
 
-	function signIn(
-		id: string,
-		email: string,
-		name: string,
-		token: string
-	): void {
-		localStorage.setItem("token", token)
+	function signIn(id: string, email: string, name: string): void {
 		localStorage.setItem("user", `${id}-!-${email}-!-${name}`)
 		if (router.query.from) {
 			router.push(router.query.from.toString())
@@ -62,10 +54,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	async function signOut() {
 		try {
-			router.push("/")
+			const response = await fetch(`/api/auth/signout`, {
+				credentials: "include",
+			})
+			if (!response.ok) throw new Error(`Please try again later.`)
 			localStorage.removeItem("user")
-			localStorage.removeItem("token")
 			setUser(null)
+			router.push("/")
 		} catch (error) {
 			console.log(error)
 		}

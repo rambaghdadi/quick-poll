@@ -78,9 +78,9 @@ export default function Poll() {
 			const response = await fetch(`/api/option/${id}`, {
 				method: "POST",
 				body: JSON.stringify({ pollId }),
+				credentials: "include",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: user ? `Bearer ${user.token}` : "",
 				},
 			})
 			const data = await response.json()

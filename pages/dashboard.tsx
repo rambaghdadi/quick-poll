@@ -21,9 +21,7 @@ export default function Dashboard() {
 			setError("")
 			setLoading(true)
 			const response = await fetch(`/api/poll/user/polls`, {
-				headers: {
-					Authorization: `Bearer ${user?.token}`,
-				},
+				credentials: "include",
 			})
 			const data = await response.json()
 			if (!response.ok) throw new Error(data.message)

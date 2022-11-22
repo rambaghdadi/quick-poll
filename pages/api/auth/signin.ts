@@ -28,11 +28,15 @@ export default async function handler(
 			{ expiresIn: "48h" }
 		)
 		res
-			.setHeader("set-cookie", `name=test2; path=/; samesite=strict; httponly;`)
+			.setHeader(
+				"set-cookie",
+				`token=${token}; path=/; samesite=strict; httponly; expires=${new Date(
+					Date.now() + 2 * 24 * 3600 * 1000
+				)};`
+			)
 			.status(200)
 			.json({
 				data: { userId: user.id, email: user.email, name: user.name },
-				token: token,
 			})
 	} catch (error) {
 		const err = error as Error

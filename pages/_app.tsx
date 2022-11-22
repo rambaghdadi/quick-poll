@@ -2,24 +2,10 @@ import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import Head from "next/head"
 import Header from "../components/General/Header/Header"
-import { useRouter } from "next/router"
 import Script from "next/script"
 import { AuthProvider } from "../context/authContext"
-import ProtectedRoute from "../components/Authentication/ProtectedRoutes"
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const authRequired = ["/dashboard"]
-	const router = useRouter()
-
-	const app = (
-		<>
-			<Header />
-			<div className="page-container">
-				<Component {...pageProps} />
-			</div>
-		</>
-	)
-
 	return (
 		<>
 			<Head>
@@ -35,13 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>Quick Polls</title>
 			</Head>
 			<AuthProvider>
-				{authRequired.includes(router.pathname) ? (
-					<ProtectedRoute>{app}</ProtectedRoute>
-				) : (
-					app
-				)}
+				<Header />
+				<div className="page-container">
+					<Component {...pageProps} />
+				</div>
 			</AuthProvider>
-
 			<Script
 				id="g-analytics-script-1"
 				async

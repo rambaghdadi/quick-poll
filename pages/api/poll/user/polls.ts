@@ -12,13 +12,12 @@ export default async function handler(
 
 	try {
 		let user
-		const authHeader = req.headers.authorization
-		if (!authHeader) {
+		const { token } = req.cookies
+		if (!token) {
 			errorStatus = 401
 			throw new Error("Not Authenticated")
 		}
 
-		const token = authHeader.split(" ")[1]
 		decodedToken = jwt.verify(token, secret)
 		if (!decodedToken) {
 			errorStatus = 401
