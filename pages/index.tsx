@@ -19,6 +19,7 @@ const Home: NextPage = () => {
 export default Home
 
 //TODO add password
+//TODO pagination to dashboard
 //TODO check date on different time zones
 //TODO add time
 //TODO add option to poll creator name

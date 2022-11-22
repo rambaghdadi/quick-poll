@@ -27,10 +27,13 @@ export default async function handler(
 			process.env.SECRET!,
 			{ expiresIn: "48h" }
 		)
-		res.status(200).json({
-			data: { userId: user.id, email: user.email, name: user.name },
-			token: token,
-		})
+		res
+			.setHeader("set-cookie", `name=test2; path=/; samesite=strict; httponly;`)
+			.status(200)
+			.json({
+				data: { userId: user.id, email: user.email, name: user.name },
+				token: token,
+			})
 	} catch (error) {
 		const err = error as Error
 		res.status(400).json({ message: err.message })
