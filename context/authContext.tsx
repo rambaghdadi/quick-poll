@@ -55,6 +55,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	async function signOut() {
 		try {
 			const response = await fetch(`/api/auth/signout`, {
+				method: "POST",
 				credentials: "include",
 			})
 			if (!response.ok) throw new Error(`Please try again later.`)
