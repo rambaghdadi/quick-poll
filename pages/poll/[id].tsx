@@ -6,19 +6,12 @@ import Option from "../../components/Poll/Option/Option"
 import OptionContainer from "../../components/Poll/Option/OptionContainer"
 import Question from "../../components/Poll/Question/Question"
 import { PollQuestion } from "../../utils/types"
-import openSocket from "socket.io-client"
 import { motion } from "framer-motion"
 import Head from "next/head"
 import { useAuth } from "../../context/authContext"
-
-// const socket = openSocket(
-// 	process.env.NODE_ENV === "development"
-// 		? "http://localhost:4000"
-// 		: "https://quickpolls-backend.onrender.com"
-// )
+import { useChannel } from "@ably-labs/react-hooks"
 
 export default function Poll() {
-	const { user } = useAuth()
 	const [poll, setPoll] = useState<PollQuestion>()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
@@ -26,20 +19,16 @@ export default function Poll() {
 	const [voting, setVoting] = useState<null | string>(null)
 	const router = useRouter()
 
-	// useEffect(() => {
-	// 	if (router.isReady) {
-	// 		getPoll()
-	// 		socket.on(router.query.id + "poll", (data) => {
-	// 			setPoll(data.updatedPost)
-	// 		})
-	// 	}
-	// }, [router.isReady])
-
 	useEffect(() => {
 		if (router.isReady) {
 			getPoll()
 		}
 	}, [router.isReady])
+
+	const [channel] = useChannel(`${router.query.id}-channel`, (message: any) => {
+		// Add new incoming comment to the list of comments
+		setPoll(message.data.poll.data.question)
+	})
 
 	async function getPoll() {
 		try {
@@ -53,19 +42,6 @@ export default function Poll() {
 		} catch (error) {
 			let err = error as Error
 			setLoading(false)
-			setError(err.message)
-		}
-	}
-
-	async function rehydrateUI() {
-		try {
-			setError("")
-			const response = await fetch(`/api/poll/${router.query.id}`)
-			const data = await response.json()
-			if (!response.ok) throw new Error(data.error)
-			setPoll(data.data)
-		} catch (error) {
-			let err = error as Error
 			setError(err.message)
 		}
 	}
@@ -88,7 +64,10 @@ export default function Poll() {
 			localStorage.setItem(pollId, id)
 			setVoting(null)
 			setNotification(true)
-			rehydrateUI()
+			channel.publish({
+				name: "updated-poll",
+				data: { poll: data },
+			})
 			setTimeout(() => {
 				setNotification(false)
 			}, 3000)

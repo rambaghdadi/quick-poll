@@ -4,6 +4,11 @@ import Head from "next/head"
 import Header from "../components/General/Header/Header"
 import Script from "next/script"
 import { AuthProvider } from "../context/authContext"
+import { configureAbly } from "@ably-labs/react-hooks"
+
+configureAbly({
+	authUrl: `${process.env.NEXT_PUBLIC_HOSTNAME}/api/createTokenRequest`,
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (

@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ably-labs/react-hooks": "^2.0.10",
     "@prisma/client": "^4.6.1",
+    "ably": "^1.2.33",
     "bcryptjs": "^2.4.3",
     "framer-motion": "^7.5.3",
     "jsonwebtoken": "^8.5.1",
